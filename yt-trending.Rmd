@@ -11,8 +11,44 @@ output:
 
 # Introducción
 
-# Análisis exploratorio del conjunto de datos
+De acuerdo con Google "la pestaña de tendencias de YouTube permite que los usuarios descubran las novedades de YouTube" [1]. Esta es una lista común compuesta de videos actuales que se muestra a todos los usuarios de un mismo país. YouTube mantiene listas de tendencias diferentes para cada país, las cuales actualiza con una frecuencia de 15 minutos. 
+Si bien Google no ha hecho publico el método para calcular las listas de tendencias, ha comunicado que buscan seleccionar videos que representen la actualidad de YouTube y sean relevantes para los usuarios del país correspondiente. Algunos de los factores que tienen en cuenta son:
 
+- La cantidad de tiempo que lleva el video en la plataforma.
+- Las visitas del video.
+- El lugar o pagina web del que provienen las visitas.
+- La rapidez con la que el video acumula visitas.
+- El rendimiento del video en comparación a videos anteriores del mismo canal.
+
+En base a estos criterios, es posible que se encuentren videos con bajas visitas en posiciones altas de la lista, si estas se comparan con otros videos de la misma lista.  
+
+El conjunto de datos seleccionado, **YouTube Trending Video Dataset (updated daily)** contiene la información de estas listas de tendencias de 11 países: Brasil, Canadá, Alemania, Francia, Gran Bretaña, India, Japón, Corea del sur, México, Rusia y Estados Unidos. Algunos de los datos que incluye son el titulo del video, la fecha de subida del video, la cantidad de likes y de visitas, etc. 
+El conjunto de datos es actualizado con una frecuencia diaria y se agregan hasta 200 videos nuevos en las listas de tendencias por día.
+
+El creador de este conjunto de datos propone algunos usos:
+
+- Análisis de sentimientos.
+- Categorizar los videos basados en sus comentarios o estadísticas.
+- Entrenar algoritmos de Machine Learning para generar comentarios.
+- Analizar que factores afectan a la popularidad de un video.
+- Análisis estadísticos a lo largo del tiempo.
+
+Añadiendo a estas propuestas, puede resultar interesante el estudio de estos datos para encontrar todo tipo de relaciones entre los datos de cada video y el entorno de YouTube, por ejemplo:
+
+- Determinar factores diferenciadores y comunes en las portadas de los videos en tendencia.
+- Identificar los tópicos que mejor funcionan para un tema especifico (salud, deporte, juegos, etc.).
+- Encontrar nichos de contenido que estén en crecimiento.
+- Estudiar las mejores formas de estructurar el titulo de un video para aumentar las visualizaciones.
+- Identificar las preferencias de cada país respecto del contenido consumido.
+
+Otra área que resulta interesante explorar es automatizar la generación de alguno de los atributos del conjunto de datos, como la miniatura, el titulo o la descripción. Finalmente la predicción del rendimiento de un video (visualizaciones, likes, dislikes) es otra razón que hace interesante el estudio de este conjunto de datos.  
+
+# Análisis exploratorio del conjunto de datos
+  
 # Preguntas y problemas
 
 # Repositorio GitHub
+
+# Referencias
+
+[1] https://support.google.com/youtube/answer/7239739?hl=es-419
