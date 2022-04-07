@@ -1699,7 +1699,39 @@ continuación:</em></p>
 ##                                                                             
 ##                                                                             
 ## </code></pre>
-<p><em>Explicación del dataset…</em></p>
+<p>El dataset usado, en ocasión del primer hito, corresponde a
+mx_dataset, el cual encapsula los videos más tendenciosos de YouTube en
+la región de Mexico. Este dataset contiene 121399 filas de información,
+dónde cada fila corresponde a los datos de un video que fue considerado
+para su captura debido a que estuvo en tendencia en algún momento de su
+existencia. Las columnas del dataset corresponde a:</p>
+<ul>
+<li>video_id (la id única de cada video en YouTube que se encuentra
+después de www.youtube.com/watch?)</li>
+<li>title (el título del video)</li>
+<li>publishedAt (la marca de tiempo cuando fue subido el video a la
+plataforma)</li>
+<li>chanelId (identificador único del canal por el cual fue subido el
+video)</li>
+<li>channelTitle (el nombre del canal dónde fue subido el video)</li>
+<li>categoryId (identificador de la categoría a la cual pertenece el
+video)</li>
+<li>trending_date (fecha en la cual el video estuvo en tendencia en
+YouTube)</li>
+<li>tags (etiquetas ingresadas por el usuario que subió el video para
+identificarlo)</li>
+<li>view_count (cantidad de vistas acumuladas el video)</li>
+<li>likes (cantidad de me gustas del video)</li>
+<li>dislikes (cantidad de no me gustas del video)</li>
+<li>comment_count (cantidad de comentarios acumulados por el video)</li>
+<li>thumbnail_link (link de la imagen de miniatura del video)</li>
+<li>comments_disabled (booleano que identifica si la posibilidad de
+escribir comentarios en el video se encuentra disponible)</li>
+<li>ratings_disabled (booleano que muestra si la habilidad de darle me
+gusta o no me gusta al video se encuentra disponible)</li>
+<li>description (descripción del video escrita por el usuario que lo
+subió).</li>
+</ul>
 <p><em>A continuación se cargará el segundo dataset de
 categorías:</em></p>
 <pre class="r"><code>library(jsonlite)
@@ -1718,6 +1750,10 @@ head(mx_categories, n= 20)</code></pre>
 </div>
 <div id="repositorio-github" class="section level1">
 <h1>Repositorio GitHub</h1>
+<p>EL proyecto se documenta en un repositorio de GitHub, donde se podrá
+acceder en el siguiente link:</p>
+<p><a href="https://github.com/Jjaraa/yt-trending">Repositorio de
+Github</a></p>
 </div>
 
 

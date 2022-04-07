@@ -29,7 +29,8 @@ summary(mx_dataset)
 ```
 
 El dataset usado, en ocasión del primer hito, corresponde a mx_dataset, el cual encapsula los videos más tendenciosos de YouTube en la región de Mexico. Este dataset contiene 121399 filas de información, dónde cada fila corresponde a los datos de un video que fue considerado para su captura debido a que estuvo en tendencia en algún momento de su existencia. Las columnas del dataset corresponde a: 
-- video_id (la id única de cada video en YouTube que se encuentra después de www.youtube.com/watch?)
+
+-  video_id (la id única de cada video en YouTube que se encuentra después de www.youtube.com/watch?)
 - title (el título del video)
 - publishedAt (la marca de tiempo cuando fue subido el video a la plataforma)
 - chanelId (identificador único del canal por el cual fue subido el video)
@@ -61,3 +62,8 @@ head(mx_categories, n= 20)
 # Preguntas y problemas
 
 # Repositorio GitHub
+
+EL proyecto se documenta en un repositorio de GitHub, donde se podrá acceder en el siguiente link:
+
+[Repositorio de Github](https://github.com/Jjaraa/yt-trending)
+
