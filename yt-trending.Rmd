@@ -28,7 +28,23 @@ head(mx_dataset, n = 20)
 summary(mx_dataset)
 ```
 
-*Explicación del dataset...*
+El dataset usado, en ocasión del primer hito, corresponde a mx_dataset, el cual encapsula los videos más tendenciosos de YouTube en la región de Mexico. Este dataset contiene 121399 filas de información, dónde cada fila corresponde a los datos de un video que fue considerado para su captura debido a que estuvo en tendencia en algún momento de su existencia. Las columnas del dataset corresponde a: 
+- video_id (la id única de cada video en YouTube que se encuentra después de www.youtube.com/watch?)
+- title (el título del video)
+- publishedAt (la marca de tiempo cuando fue subido el video a la plataforma)
+- chanelId (identificador único del canal por el cual fue subido el video)
+- channelTitle (el nombre del canal dónde fue subido el video)
+- categoryId (identificador de la categoría a la cual pertenece el video)
+- trending_date (fecha en la cual el video estuvo en tendencia en YouTube)
+- tags (etiquetas ingresadas por el usuario que subió el video para identificarlo)
+- view_count (cantidad de vistas acumuladas el video)
+- likes (cantidad de me gustas del video)
+- dislikes (cantidad de no me gustas del video)
+- comment_count (cantidad de comentarios acumulados por el video)
+- thumbnail_link (link de la imagen de miniatura del video)
+- comments_disabled (booleano que identifica si la posibilidad de escribir comentarios en el video se encuentra disponible)
+- ratings_disabled (booleano que muestra si la habilidad de darle me gusta o no me gusta al video se encuentra disponible)
+- description (descripción del video escrita por el usuario que lo subió).
 
 *A continuación se cargará el segundo dataset de categorías:*
 

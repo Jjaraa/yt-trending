@@ -2,3 +2,5 @@ dataset/
 .DS_Store
 test.Rmd
 test.html
+.RData
+.Rhistory
