@@ -1,7 +1,11 @@
 ---
-title: "R Notebook"
+title: "Analisis de dataset: Youtube Trending Video Dataset"
+author: "Marucio Campos, Jonathan Jara y Sebastián Pardo"
+date: "8 de Abril de 2022"
 output:
   html_document:
+    theme: default
+    toc: yes
     df_print: paged
 ---
 
