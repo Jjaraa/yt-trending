@@ -21,7 +21,7 @@ De acuerdo con Google "la pestaña de tendencias de YouTube permite que los usua
 
 En base a estos criterios, es posible que se encuentren videos con bajas visitas en posiciones altas de la lista, si estas se comparan con otros videos de la misma lista.
 
-El conjunto de datos seleccionado, [**YouTube Trending Video Dataset (updated daily)**](https://www.kaggle.com/datasets/rsrishav/youtube-trending-video-dataset/versions/610) contiene la información de estas listas de tendencias de 11 países: Brasil, Canadá, Alemania, Francia, Gran Bretaña, India, Japón, Corea del sur, México, Rusia y Estados Unidos. Algunos de los datos que incluye son el titulo del video, la fecha de subida del video, la cantidad de likes y de visitas, etc. El conjunto de datos es actualizado con una frecuencia diaria y se agregan hasta 200 videos nuevos en las listas de tendencias por día.
+El conjunto de datos seleccionado, [**YouTube Trending Video Dataset (updated daily)**](https://www.kaggle.com/datasets/rsrishav/youtube-trending-video-dataset/versions/610) contiene la información de estas listas de tendencias de 11 países: Brasil, Canadá, Alemania, Francia, Gran Bretaña, India, Japón, Corea del sur, México, Rusia y Estados Unidos. Algunos de los datos que incluye son el titulo del video, la fecha de subida del video, la cantidad de likes y de visitas, etc. El conjunto de datos es actualizado con una frecuencia diaria y se agregan hasta 200 videos nuevos en las listas de tendencias por día. Se utilizará la versión 610 del conjunto de datos, la cual contiene datos actualizados hasta el día 7 de Abril de 2022.
 
 El creador de este conjunto de datos propone algunos usos:
 
