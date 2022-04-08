@@ -45,9 +45,59 @@ Otra área que resulta interesante explorar es automatizar la generación de alg
 
 # Análisis exploratorio del conjunto de datos
   
+*Los datos a analizar corresponden a los trendings de youtube para el país de México, separado en dos dataset, uno que corresponde al principal, y un segundo dataset con información de las categorías disponibles para cada video.*
+
+*Se comenzará cargando el dataset principal a un dataframe:*
+
+```{r}
+mx_dataset <- read.csv("./dataset/MX_youtube_trending_data.csv")
+head(mx_dataset, n = 20)
+```
+
+*Una versión resumida del dataset se encuentra a continuación:*
+
+```{r}
+summary(mx_dataset)
+```
+
+El dataset usado, en ocasión del primer hito, corresponde a mx_dataset, el cual encapsula los videos más tendenciosos de YouTube en la región de Mexico. Este dataset contiene 121399 filas de información, dónde cada fila corresponde a los datos de un video que fue considerado para su captura debido a que estuvo en tendencia en algún momento de su existencia. Las columnas del dataset corresponde a: 
+
+-  video_id (la id única de cada video en YouTube que se encuentra después de www.youtube.com/watch?)
+- title (el título del video)
+- publishedAt (la marca de tiempo cuando fue subido el video a la plataforma)
+- chanelId (identificador único del canal por el cual fue subido el video)
+- channelTitle (el nombre del canal dónde fue subido el video)
+- categoryId (identificador de la categoría a la cual pertenece el video)
+- trending_date (fecha en la cual el video estuvo en tendencia en YouTube)
+- tags (etiquetas ingresadas por el usuario que subió el video para identificarlo)
+- view_count (cantidad de vistas acumuladas el video)
+- likes (cantidad de me gustas del video)
+- dislikes (cantidad de no me gustas del video)
+- comment_count (cantidad de comentarios acumulados por el video)
+- thumbnail_link (link de la imagen de miniatura del video)
+- comments_disabled (booleano que identifica si la posibilidad de escribir comentarios en el video se encuentra disponible)
+- ratings_disabled (booleano que muestra si la habilidad de darle me gusta o no me gusta al video se encuentra disponible)
+- description (descripción del video escrita por el usuario que lo subió).
+
+*A continuación se cargará el segundo dataset de categorías:*
+
+```{r}
+library(jsonlite)
+mx_list_categories <- fromJSON("./dataset/MX_category_id.json")
+mx_categories <- data.frame(mx_list_categories)
+head(mx_categories, n= 20)
+```
+
+*Explicacion de las categorias...*
+
+
 # Preguntas y problemas
 
 # Repositorio GitHub
+
+El proyecto se documenta en un repositorio de GitHub, donde se podrá acceder en el siguiente link:
+
+[Repositorio de Github](https://github.com/Jjaraa/yt-trending)
 
 # Referencias
 
