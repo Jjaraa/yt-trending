@@ -11,40 +11,38 @@ output:
 
 # Introducción
 
-De acuerdo con Google "la pestaña de tendencias de YouTube permite que los usuarios descubran las novedades de YouTube" [1]. Esta es una lista común compuesta de videos actuales que se muestra a todos los usuarios de un mismo país. YouTube mantiene listas de tendencias diferentes para cada país, las cuales actualiza con una frecuencia de 15 minutos. 
-Si bien Google no ha hecho publico el método para calcular las listas de tendencias, ha comunicado que buscan seleccionar videos que representen la actualidad de YouTube y sean relevantes para los usuarios del país correspondiente. Algunos de los factores que tienen en cuenta son:
+De acuerdo con Google "la pestaña de tendencias de YouTube permite que los usuarios descubran las novedades de YouTube" [1]. Esta es una lista común compuesta de videos actuales que se muestra a todos los usuarios de un mismo país. YouTube mantiene listas de tendencias diferentes para cada país, las cuales actualiza con una frecuencia de 15 minutos. Si bien Google no ha hecho publico el método para calcular las listas de tendencias, ha comunicado que buscan seleccionar videos que representen la actualidad de YouTube y sean relevantes para los usuarios del país correspondiente. Algunos de los factores que tienen en cuenta son:
 
-- La cantidad de tiempo que lleva el video en la plataforma.
-- Las visitas del video.
-- El lugar o pagina web del que provienen las visitas.
-- La rapidez con la que el video acumula visitas.
-- El rendimiento del video en comparación a videos anteriores del mismo canal.
+-   La cantidad de tiempo que lleva el video en la plataforma.
+-   Las visitas del video.
+-   El lugar o pagina web del que provienen las visitas.
+-   La rapidez con la que el video acumula visitas.
+-   El rendimiento del video en comparación a videos anteriores del mismo canal.
 
-En base a estos criterios, es posible que se encuentren videos con bajas visitas en posiciones altas de la lista, si estas se comparan con otros videos de la misma lista.  
+En base a estos criterios, es posible que se encuentren videos con bajas visitas en posiciones altas de la lista, si estas se comparan con otros videos de la misma lista.
 
-El conjunto de datos seleccionado, **YouTube Trending Video Dataset (updated daily)** contiene la información de estas listas de tendencias de 11 países: Brasil, Canadá, Alemania, Francia, Gran Bretaña, India, Japón, Corea del sur, México, Rusia y Estados Unidos. Algunos de los datos que incluye son el titulo del video, la fecha de subida del video, la cantidad de likes y de visitas, etc. 
-El conjunto de datos es actualizado con una frecuencia diaria y se agregan hasta 200 videos nuevos en las listas de tendencias por día.
+El conjunto de datos seleccionado, [**YouTube Trending Video Dataset (updated daily)**](https://www.kaggle.com/datasets/rsrishav/youtube-trending-video-dataset/versions/610) contiene la información de estas listas de tendencias de 11 países: Brasil, Canadá, Alemania, Francia, Gran Bretaña, India, Japón, Corea del sur, México, Rusia y Estados Unidos. Algunos de los datos que incluye son el titulo del video, la fecha de subida del video, la cantidad de likes y de visitas, etc. El conjunto de datos es actualizado con una frecuencia diaria y se agregan hasta 200 videos nuevos en las listas de tendencias por día.
 
 El creador de este conjunto de datos propone algunos usos:
 
-- Análisis de sentimientos.
-- Categorizar los videos basados en sus comentarios o estadísticas.
-- Entrenar algoritmos de Machine Learning para generar comentarios.
-- Analizar que factores afectan a la popularidad de un video.
-- Análisis estadísticos a lo largo del tiempo.
+-   Análisis de sentimientos.
+-   Categorizar los videos basados en sus comentarios o estadísticas.
+-   Entrenar algoritmos de Machine Learning para generar comentarios.
+-   Analizar que factores afectan a la popularidad de un video.
+-   Análisis estadísticos a lo largo del tiempo.
 
 Añadiendo a estas propuestas, puede resultar interesante el estudio de estos datos para encontrar todo tipo de relaciones entre los datos de cada video y el entorno de YouTube, por ejemplo:
 
-- Determinar factores diferenciadores y comunes en las portadas de los videos en tendencia.
-- Identificar los tópicos que mejor funcionan para un tema especifico (salud, deporte, juegos, etc.).
-- Encontrar nichos de contenido que estén en crecimiento.
-- Estudiar las mejores formas de estructurar el titulo de un video para aumentar las visualizaciones.
-- Identificar las preferencias de cada país respecto del contenido consumido.
+-   Determinar factores diferenciadores y comunes en las portadas de los videos en tendencia.
+-   Identificar los tópicos que mejor funcionan para un tema especifico (salud, deporte, juegos, etc.).
+-   Encontrar nichos de contenido que estén en crecimiento.
+-   Estudiar las mejores formas de estructurar el titulo de un video para aumentar las visualizaciones.
+-   Identificar las preferencias de cada país respecto del contenido consumido.
 
-Otra área que resulta interesante explorar es automatizar la generación de alguno de los atributos del conjunto de datos, como la miniatura, el titulo o la descripción. Finalmente la predicción del rendimiento de un video (visualizaciones, likes, dislikes) es otra razón que hace interesante el estudio de este conjunto de datos.  
+Otra área que resulta interesante explorar es automatizar la generación de alguno de los atributos del conjunto de datos, como la miniatura, el titulo o la descripción. Finalmente la predicción del rendimiento de un video (visualizaciones, likes, dislikes) es otra razón que hace interesante el estudio de este conjunto de datos.
 
 # Análisis exploratorio del conjunto de datos
-  
+
 *Los datos a analizar corresponden a los trendings de youtube para el país de México, separado en dos dataset, uno que corresponde al principal, y un segundo dataset con información de las categorías disponibles para cada video.*
 
 *Se comenzará cargando el dataset principal a un dataframe:*
@@ -54,30 +52,36 @@ mx_dataset <- read.csv("./dataset/MX_youtube_trending_data.csv")
 head(mx_dataset, n = 20)
 ```
 
+Las dimensiones del dataset son 121399 files y 16 columnas. 
+
+```{r}
+dim(mx_dataset)
+```
+
 *Una versión resumida del dataset se encuentra a continuación:*
 
 ```{r}
 summary(mx_dataset)
 ```
 
-El dataset usado, en ocasión del primer hito, corresponde a mx_dataset, el cual encapsula los videos más tendenciosos de YouTube en la región de Mexico. Este dataset contiene 121399 filas de información, dónde cada fila corresponde a los datos de un video que fue considerado para su captura debido a que estuvo en tendencia en algún momento de su existencia. Las columnas del dataset corresponde a: 
+El dataset usado, en ocasión del primer hito, corresponde a mx_dataset, el cual encapsula los videos más tendenciosos de YouTube en la región de Mexico. Este dataset contiene 121399 filas de información, dónde cada fila corresponde a los datos de un video que fue considerado para su captura debido a que estuvo en tendencia en algún momento de su existencia. Las columnas del dataset corresponde a:
 
--  video_id (la id única de cada video en YouTube que se encuentra después de www.youtube.com/watch?)
-- title (el título del video)
-- publishedAt (la marca de tiempo cuando fue subido el video a la plataforma)
-- chanelId (identificador único del canal por el cual fue subido el video)
-- channelTitle (el nombre del canal dónde fue subido el video)
-- categoryId (identificador de la categoría a la cual pertenece el video)
-- trending_date (fecha en la cual el video estuvo en tendencia en YouTube)
-- tags (etiquetas ingresadas por el usuario que subió el video para identificarlo)
-- view_count (cantidad de vistas acumuladas el video)
-- likes (cantidad de me gustas del video)
-- dislikes (cantidad de no me gustas del video)
-- comment_count (cantidad de comentarios acumulados por el video)
-- thumbnail_link (link de la imagen de miniatura del video)
-- comments_disabled (booleano que identifica si la posibilidad de escribir comentarios en el video se encuentra disponible)
-- ratings_disabled (booleano que muestra si la habilidad de darle me gusta o no me gusta al video se encuentra disponible)
-- description (descripción del video escrita por el usuario que lo subió).
+-   video_id (la id única de cada video en YouTube que se encuentra después de www.youtube.com/watch?)
+-   title (el título del video)
+-   publishedAt (la marca de tiempo cuando fue subido el video a la plataforma)
+-   chanelId (identificador único del canal por el cual fue subido el video)
+-   channelTitle (el nombre del canal dónde fue subido el video)
+-   categoryId (identificador de la categoría a la cual pertenece el video)
+-   trending_date (fecha en la cual el video estuvo en tendencia en YouTube)
+-   tags (etiquetas ingresadas por el usuario que subió el video para identificarlo)
+-   view_count (cantidad de vistas acumuladas el video)
+-   likes (cantidad de me gustas del video)
+-   dislikes (cantidad de no me gustas del video)
+-   comment_count (cantidad de comentarios acumulados por el video)
+-   thumbnail_link (link de la imagen de miniatura del video)
+-   comments_disabled (booleano que identifica si la posibilidad de escribir comentarios en el video se encuentra disponible)
+-   ratings_disabled (booleano que muestra si la habilidad de darle me gusta o no me gusta al video se encuentra disponible)
+-   description (descripción del video escrita por el usuario que lo subió).
 
 *A continuación se cargará el segundo dataset de categorías:*
 
@@ -88,7 +92,38 @@ mx_categories <- data.frame(mx_list_categories)
 head(mx_categories, n= 20)
 ```
 
+Dimensiones del conjunto de categorías:
+
+```{r}
+dim(mx_categories)
+```
+
+La columna *items.snippet* del dataset de categorías es de tipo *data.frame*, es decir, cada fila del conjunto contiene otro *data.frame* en el valor de la columna *items.snippet*.
+
+```{r}
+class(mx_categories$items.snippet)
+head(mx_categories$items.snippet)
+```
+
+Existen un total de 30 categorias, son las siguientes: 
+
+```{r}
+unique(mx_categories$items.snippet$title)
+```
+
 *Explicacion de las categorias...*
+
+El dataset *mx_dataset* contiene valores nulos o en blanco únicamente en la columna *description*. Se encontraron 6819 valores faltantes.
+```{r}
+null_values_dataset <- sapply(mx_dataset, function(x) is.na(x) | x == "")
+colSums(null_values_dataset)
+```
+
+El dataset *mx_categories* no contiene valores nulos o en blanco en ninguna de sus columnas. Esto incluye las columnas que se encuentran dentro del dataframe de la columna *items.snippet*.
+```{r}
+sapply(mx_categories, function(x) any(is.na(x) | x == ""))
+```
+
 
 
 # Preguntas y problemas
@@ -101,4 +136,4 @@ El proyecto se documenta en un repositorio de GitHub, donde se podrá acceder en
 
 # Referencias
 
-[1] https://support.google.com/youtube/answer/7239739?hl=es-419
+[1] <https://support.google.com/youtube/answer/7239739?hl=es-419>
