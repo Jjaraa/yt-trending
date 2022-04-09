@@ -48,8 +48,9 @@ Los datos a analizar corresponden a los trendings de YouTube para el país de M�
 Se comenzará cargando el dataset principal a un dataframe:
 
 ```{r}
-mx_dataset <- read.csv("./dataset/MX_youtube_trending_data.csv")
+mx_dataset <- read.csv("./dataset/MX_youtube_trending_data.csv", encoding = "UTF-8")
 head(mx_dataset, n = 20)
+mx_dataset
 ```
 
 Las dimensiones del dataset son, 121399 filas y 16 columnas. 
@@ -113,9 +114,9 @@ unique(mx_categories$items.snippet$title)
 
 *Explicacion de las categorias...*
 
-El dataset *mx_dataset* contiene valores nulos o en blanco únicamente en la columna *description*. Se encontraron 6819 valores faltantes.
+El dataset *mx_dataset* contiene valores nulos o en blanco en las columna *description* y *tags*. Se encontraron 6819 valores faltantes en la columna *description* y 20407 en la columna *tags*.
 ```{r}
-null_values_dataset <- sapply(mx_dataset, function(x) is.na(x) | x == "")
+null_values_dataset <- sapply(mx_dataset, function(x) is.na(x) | x == "" | x == "[None]")
 colSums(null_values_dataset)
 ```
 
