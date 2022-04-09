@@ -11,17 +11,17 @@ output:
 
 # Introducción
 
-De acuerdo con Google "la pestaña de tendencias de YouTube permite que los usuarios descubran las novedades de YouTube" [1]. Esta es una lista común compuesta de videos actuales que se muestra a todos los usuarios de un mismo país. YouTube mantiene listas de tendencias diferentes para cada país, las cuales actualiza con una frecuencia de 15 minutos. Si bien Google no ha hecho publico el método para calcular las listas de tendencias, ha comunicado que buscan seleccionar videos que representen la actualidad de YouTube y sean relevantes para los usuarios del país correspondiente. Algunos de los factores que tienen en cuenta son:
+De acuerdo con Google "la pestaña de tendencias de YouTube permite que los usuarios descubran las novedades de YouTube" [1]. Esta es una lista común compuesta de videos actuales que se muestra a todos los usuarios de un mismo país. YouTube mantiene listas de tendencias diferentes para cada país, las cuales actualiza con una frecuencia de 15 minutos. Si bien Google no ha hecho público el método para calcular las listas de tendencias, ha comunicado que buscan seleccionar videos que representen la actualidad de YouTube y sean relevantes para los usuarios del país correspondiente. Algunos de los factores que tienen en cuenta son:
 
 -   La cantidad de tiempo que lleva el video en la plataforma.
 -   Las visitas del video.
--   El lugar o pagina web del que provienen las visitas.
+-   El lugar o página web del que provienen las visitas.
 -   La rapidez con la que el video acumula visitas.
 -   El rendimiento del video en comparación a videos anteriores del mismo canal.
 
 En base a estos criterios, es posible que se encuentren videos con bajas visitas en posiciones altas de la lista, si estas se comparan con otros videos de la misma lista.
 
-El conjunto de datos seleccionado, [**YouTube Trending Video Dataset (updated daily)**](https://www.kaggle.com/datasets/rsrishav/youtube-trending-video-dataset/versions/610) contiene la información de estas listas de tendencias de 11 países: Brasil, Canadá, Alemania, Francia, Gran Bretaña, India, Japón, Corea del sur, México, Rusia y Estados Unidos. Algunos de los datos que incluye son el titulo del video, la fecha de subida del video, la cantidad de likes y de visitas, etc. El conjunto de datos es actualizado con una frecuencia diaria y se agregan hasta 200 videos nuevos en las listas de tendencias por día. Se utilizará la versión 610 del conjunto de datos, la cual contiene datos actualizados hasta el día 7 de Abril de 2022.
+El conjunto de datos seleccionado, [**YouTube Trending Video Dataset (updated daily)**](https://www.kaggle.com/datasets/rsrishav/youtube-trending-video-dataset/versions/610) contiene la información de estas listas de tendencias de 11 países: Brasil, Canadá, Alemania, Francia, Gran Bretaña, India, Japón, Corea del sur, México, Rusia y Estados Unidos. Algunos de los datos que incluye son el título del video, la fecha de subida del video, la cantidad de likes y de visitas, etc. El conjunto de datos es actualizado con una frecuencia diaria y se agregan hasta 200 videos nuevos en las listas de tendencias por día. Se utilizará la versión 610 del conjunto de datos, la cual contiene datos actualizados hasta el día 7 de Abril de 2022.
 
 El creador de este conjunto de datos propone algunos usos:
 
@@ -34,37 +34,37 @@ El creador de este conjunto de datos propone algunos usos:
 Añadiendo a estas propuestas, puede resultar interesante el estudio de estos datos para encontrar todo tipo de relaciones entre los datos de cada video y el entorno de YouTube, por ejemplo:
 
 -   Determinar factores diferenciadores y comunes en las portadas de los videos en tendencia.
--   Identificar los tópicos que mejor funcionan para un tema especifico (salud, deporte, juegos, etc.).
+-   Identificar los tópicos que mejor funcionan para un tema específico (salud, deporte, juegos, etc.).
 -   Encontrar nichos de contenido que estén en crecimiento.
--   Estudiar las mejores formas de estructurar el titulo de un video para aumentar las visualizaciones.
+-   Estudiar las mejores formas de estructurar el título de un video para aumentar las visualizaciones.
 -   Identificar las preferencias de cada país respecto del contenido consumido.
 
-Otra área que resulta interesante explorar es automatizar la generación de alguno de los atributos del conjunto de datos, como la miniatura, el titulo o la descripción. Finalmente la predicción del rendimiento de un video (visualizaciones, likes, dislikes) es otra razón que hace interesante el estudio de este conjunto de datos.
+Otra área que resulta interesante explorar es automatizar la generación de alguno de los atributos del conjunto de datos, como la miniatura, el título o la descripción. Finalmente, la predicción del rendimiento de un video (visualizaciones, likes, dislikes) es otra razón que hace interesante el estudio de este conjunto de datos.
 
 # Análisis exploratorio del conjunto de datos
 
-*Los datos a analizar corresponden a los trendings de youtube para el país de México, separado en dos dataset, uno que corresponde al principal, y un segundo dataset con información de las categorías disponibles para cada video.*
+Los datos a analizar corresponden a los trendings de YouTube para el país de México, separado en dos dataset, uno que corresponde al principal, y un segundo dataset con información de las categorías disponibles para cada video.
 
-*Se comenzará cargando el dataset principal a un dataframe:*
+Se comenzará cargando el dataset principal a un dataframe:
 
 ```{r}
 mx_dataset <- read.csv("./dataset/MX_youtube_trending_data.csv")
 head(mx_dataset, n = 20)
 ```
 
-Las dimensiones del dataset son 121399 files y 16 columnas. 
+Las dimensiones del dataset son, 121399 filas y 16 columnas. 
 
 ```{r}
 dim(mx_dataset)
 ```
 
-*Una versión resumida del dataset se encuentra a continuación:*
+Una versión resumida del dataset se encuentra a continuación:
 
 ```{r}
 summary(mx_dataset)
 ```
 
-El dataset usado, en ocasión del primer hito, corresponde a mx_dataset, el cual encapsula los videos más tendenciosos de YouTube en la región de Mexico. Este dataset contiene 121399 filas de información, dónde cada fila corresponde a los datos de un video que fue considerado para su captura debido a que estuvo en tendencia en algún momento de su existencia. Las columnas del dataset corresponde a:
+El dataset usado, en ocasión del primer hito, corresponde a mx_dataset, el cual encapsula los videos más tendenciosos de YouTube en la región de México. Este dataset contiene, 121399 filas de información, dónde cada fila corresponde a los datos de un video que fue considerado para su captura debido a que estuvo en tendencia en algún momento de su existencia. Las columnas del dataset corresponde a:
 
 -   video_id (la id única de cada video en YouTube que se encuentra después de www.youtube.com/watch?)
 -   title (el título del video)
@@ -75,7 +75,7 @@ El dataset usado, en ocasión del primer hito, corresponde a mx_dataset, el cual
 -   trending_date (fecha en la cual el video estuvo en tendencia en YouTube)
 -   tags (etiquetas ingresadas por el usuario que subió el video para identificarlo)
 -   view_count (cantidad de vistas acumuladas el video)
--   likes (cantidad de me gustas del video)
+-   likes (cantidad de "me gusta" del video)
 -   dislikes (cantidad de no me gustas del video)
 -   comment_count (cantidad de comentarios acumulados por el video)
 -   thumbnail_link (link de la imagen de miniatura del video)
@@ -83,7 +83,7 @@ El dataset usado, en ocasión del primer hito, corresponde a mx_dataset, el cual
 -   ratings_disabled (booleano que muestra si la habilidad de darle me gusta o no me gusta al video se encuentra disponible)
 -   description (descripción del video escrita por el usuario que lo subió).
 
-*A continuación se cargará el segundo dataset de categorías:*
+A continuación se cargará el segundo dataset de categorías:
 
 ```{r}
 library(jsonlite)
@@ -105,7 +105,7 @@ class(mx_categories$items.snippet)
 head(mx_categories$items.snippet)
 ```
 
-Existen un total de 30 categorias, son las siguientes: 
+Existen un total de 30 categorías, son las siguientes: 
 
 ```{r}
 unique(mx_categories$items.snippet$title)
