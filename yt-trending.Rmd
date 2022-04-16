@@ -50,10 +50,9 @@ Se comenzará cargando el dataset principal a un dataframe:
 ```{r}
 mx_dataset <- read.csv("./dataset/MX_youtube_trending_data.csv", encoding = "UTF-8")
 head(mx_dataset, n = 20)
-mx_dataset
 ```
 
-Las dimensiones del dataset son, 121399 filas y 16 columnas. 
+Las dimensiones del dataset son, 121.399 filas y 16 columnas. 
 
 ```{r}
 dim(mx_dataset)
@@ -126,6 +125,177 @@ sapply(mx_categories, function(x) any(is.na(x) | x == ""))
 ```
 
 
+---
+
+grafico de cantidad de videos por categoria
+
+```{r}
+library(ggplot2)
+aux_categories <- data.frame(categoryId = mx_categories$items.id , categoryTitle = mx_categories$items.snippet$title)
+mx_categories <- merge(mx_dataset, aux_categories)
+
+ggplot(mx_categories, aes(x = categoryTitle)) +
+  geom_bar(stat = 'count') +
+  coord_flip() +
+  xlab("Categoria") + ylab("Cantidad de videos")
+```
+
+grafico de dispersion de la cantidad de visitas vs cantidad de likes
+
+```{r}
+ggplot(mx_dataset, aes(x = view_count, y = likes)) +
+  geom_point() +
+  xlab("Cantidad de visitas") + ylab("Cantidad de likes")
+```
+
+grafico de dispersion de cantidad de visitas vs cantidad de dislikes
+
+```{r}
+ggplot(mx_dataset, aes(x = view_count, y = dislikes)) +
+  geom_point() +
+  xlab("Cantidad de visitas") + ylab("Cantidad de dislikes")
+```
+
+grafico de dispersion de cantidad de visitas vs cantidad de comentarios
+
+```{r}
+ggplot(mx_dataset, aes(x = view_count, y = comment_count)) +
+  geom_point() +
+  xlab("Cantidad de visitas") + ylab("Cantidad de comentarios")
+```
+
+
+gráfico de top 10 canales con mas videos en la lista de trendings
+
+```{r}
+library(tidyverse)
+top_10 <- group_by(mx_dataset, channelTitle) |>
+  summarize(Freq = n()) |>
+  arrange(desc(Freq)) |>
+  top_n(10)
+
+top_10
+
+ggplot(top_10, aes(x = reorder(channelTitle, Freq), y = Freq)) +
+  geom_bar(stat = 'identity') +
+  coord_flip() +
+  xlab('Canal de YouTube') +
+  ylab('Cantidad de videos en trendings')
+```
+
+grafico de acumulacion de cantidad de likes y dislikes del top 10 canales con mas videos en trendings
+
+```{r fig.width = 8}
+library(gridExtra)
+library("scales")
+top_10_accumulations <- group_by(mx_dataset, channelTitle) |>
+  summarize(Freq = n(), likes = sum(likes), dislikes = sum(dislikes)) |>
+  arrange(desc(Freq)) |>
+  top_n(10, Freq)
+
+likes_plot <- ggplot(top_10_accumulations,aes(x = reorder(channelTitle, Freq),y = likes)) + 
+  geom_bar(stat = 'identity') + 
+  coord_flip() +
+  scale_y_continuous(labels = scales::comma, breaks = c(0, 245000000, 490000000, 735000000, 980000000)) +
+  xlab("Canal") + ylab("Cantidad de likes")
+
+dislikes_plot <- ggplot(top_10_accumulations,aes(x = reorder(channelTitle, Freq),y = dislikes)) + 
+  geom_bar(stat = 'identity') + 
+  coord_flip() +
+  scale_y_continuous(labels = scales::comma) +
+  xlab("Canal") + ylab("Cantidad de dislikes")
+
+
+grid.arrange(likes_plot, dislikes_plot)
+```
+
+grafico de top 10 canales con mayor acumulacion de likes
+
+```{r}
+
+likes_accumulation <- group_by(mx_dataset, channelTitle) |>
+  summarize(Accumulation = sum(likes)) |>
+  arrange(desc(Accumulation)) |>
+  top_n(10)
+
+ggplot(likes_accumulation, aes(x = reorder(channelTitle, Accumulation), y = Accumulation)) +
+  geom_bar(stat = 'identity') +
+  coord_flip() +
+  xlab('Canal de YouTube') +
+  ylab('Cantidad de videos en trendings')
+```
+
+matriz de correlación entre columnas
+
+```{r}
+library(corrplot)
+
+mx_dataset$comments_disabled <- as.numeric(as.logical(mx_dataset$comments_disabled))
+mx_dataset$ratings_disabled <- as.numeric(as.logical(mx_dataset$ratings_disabled))
+
+numeric_mx_dataset <- Filter(is.numeric, mx_dataset)
+numeric_mx_dataset.cor <- cor(numeric_mx_dataset)
+corrplot(numeric_mx_dataset.cor, method = 'number')
+```
+
+```{r}
+mx_dataset <- read.csv("./dataset/MX_youtube_trending_data.csv", encoding = "UTF-8")
+mx_dataset$country <- "MX"
+us_dataset <- read.csv("./dataset/US_youtube_trending_data.csv", encoding = "UTF-8")
+us_dataset$country <- "US"
+br_dataset <- read.csv("./dataset/BR_youtube_trending_data.csv", encoding = "UTF-8")
+br_dataset$country <- "BR"
+ca_dataset <- read.csv("./dataset/CA_youtube_trending_data.csv", encoding = "UTF-8")
+ca_dataset$country <- "CA"
+de_dataset <- read.csv("./dataset/DE_youtube_trending_data.csv", encoding = "UTF-8")
+de_dataset$country <- "DE"
+fr_dataset <- read.csv("./dataset/FR_youtube_trending_data.csv", encoding = "UTF-8")
+fr_dataset$country <- "FR"
+gb_dataset <- read.csv("./dataset/GB_youtube_trending_data.csv", encoding = "UTF-8")
+gb_dataset$country <- "BG"
+in_dataset <- read.csv("./dataset/IN_youtube_trending_data.csv", encoding = "UTF-8")
+in_dataset$country <- "IN"
+jp_dataset <- read.csv("./dataset/JP_youtube_trending_data.csv", encoding = "UTF-8")
+jp_dataset$country <- "JP"
+kr_dataset <- read.csv("./dataset/KR_youtube_trending_data.csv", encoding = "UTF-8")
+kr_dataset$country <- "KR"
+ru_dataset <- read.csv("./dataset/RU_youtube_trending_data.csv", encoding = "UTF-8")
+ru_dataset$country <- "RU"
+
+dataset <- rbind(mx_dataset, us_dataset, br_dataset, ca_dataset, de_dataset, fr_dataset, gb_dataset, in_dataset, jp_dataset, kr_dataset, ru_dataset)
+
+
+```
+
+cantidad de videos en trending por pais
+
+```{r}
+
+videos_amount <- group_by(dataset, country) |>
+  summarize(amount = n())
+
+ggplot(videos_amount, aes(x = country, y = amount)) +
+  geom_bar(stat = 'identity') +
+  scale_y_continuous(labels = scales::comma) +
+  coord_flip() +
+  xlab("Pais") + ylab("Cantidad de videos")
+```
+
+cantidad de visitas de todos los videos en la lista de trendings por pais
+
+```{r}
+
+view_count <- group_by(dataset, country) |>
+  summarize(views = sum(view_count))
+
+ggplot(view_count, aes(x = country, y = views)) +
+  geom_bar(stat = 'identity') +
+  scale_y_continuous(labels = scales::comma) +
+  xlab("Pais") + ylab("Cantidad de visitas")
+```
+
+
+---
 
 # Preguntas y problemas
 
