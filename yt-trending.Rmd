@@ -267,7 +267,9 @@ ggplot(likes_accumulation, aes(x = reorder(channelTitle, Accumulation), y = Accu
   ylab('Cantidad de videos en trendings')
 ```
 
-matriz de correlación entre columnas
+### Matriz de correlación
+
+Matriz de correlación entre columnas para el dataset de trendings de México.
 
 ```{r}
 library(corrplot)
@@ -309,7 +311,13 @@ dataset <- rbind(mx_dataset, us_dataset, br_dataset, ca_dataset, de_dataset, fr_
 
 ```
 
-cantidad de videos en trending por pais
+## Análisis comparativo con los demás paises
+
+Si bien el análisis exploratorio inicial se realizó tomando el dataset correspondiente a México, existen muchos otros paises dentro del dataset de trendings de Youtube, por lo cual se realizan algunos análisis generales a continuación.
+
+## Cantidad de videos en trending por pais
+
+La cantidad de videos en trending por cada pais se presenta en el siguiente gráfico:
 
 ```{r}
 
@@ -323,7 +331,9 @@ ggplot(videos_amount, aes(x = country, y = amount)) +
   xlab("Pais") + ylab("Cantidad de videos")
 ```
 
-cantidad de visitas de todos los videos en la lista de trendings por pais
+## Cantidad de visitas por pais
+
+La cantidad de visitas de todos los videos en la lista de trendings por pais se presenta en el siguiente gráfico:
 
 ```{r}
 
