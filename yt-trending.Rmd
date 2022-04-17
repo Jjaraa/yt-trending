@@ -146,7 +146,9 @@ sapply(mx_categories, function(x) any(is.na(x) | x == ""))
 
 ------------------------------------------------------------------------
 
-grafico de cantidad de videos por categoria
+## Cantidad de videos por categoria
+
+La cantidad de videos que tiene cada categoría para el dataset de México se presenta en el siguiente gráfico:
 
 ```{r}
 library(ggplot2)
@@ -159,7 +161,14 @@ ggplot(mx_categories, aes(x = categoryTitle)) +
   xlab("Categoria") + ylab("Cantidad de videos")
 ```
 
-grafico de dispersion de la cantidad de visitas vs cantidad de likes
+## Cantidad de likes, dislikes y comentarios
+
+Dentro del análisis exploratorio de los datos se contempla un análisis sobre los likes, dislikes y comentarios para el dataset de trendings de México.
+
+### Visitas vs likes
+
+La cantidad de las visitas vs likes se presenta en el siguiente gráfico de disperción:
+
 
 ```{r}
 ggplot(mx_dataset, aes(x = view_count, y = likes)) +
@@ -167,7 +176,10 @@ ggplot(mx_dataset, aes(x = view_count, y = likes)) +
   xlab("Cantidad de visitas") + ylab("Cantidad de likes")
 ```
 
-grafico de dispersion de cantidad de visitas vs cantidad de dislikes
+### Visitas vs dislikes
+
+La cantidad de las visitas vs dislikes se presenta en el siguiente gráfico de disperción: 
+
 
 ```{r}
 ggplot(mx_dataset, aes(x = view_count, y = dislikes)) +
@@ -175,7 +187,9 @@ ggplot(mx_dataset, aes(x = view_count, y = dislikes)) +
   xlab("Cantidad de visitas") + ylab("Cantidad de dislikes")
 ```
 
-grafico de dispersion de cantidad de visitas vs cantidad de comentarios
+### Visitas vs comentarios
+
+La cantidad de visitas vs cantidad de comentarios se presenta de la siguiente manera:
 
 ```{r}
 ggplot(mx_dataset, aes(x = view_count, y = comment_count)) +
@@ -183,7 +197,13 @@ ggplot(mx_dataset, aes(x = view_count, y = comment_count)) +
   xlab("Cantidad de visitas") + ylab("Cantidad de comentarios")
 ```
 
-gráfico de top 10 canales con mas videos en la lista de trendings
+## Comparativa de canales
+
+A continuación se realizará un análisis a los 10 canales con mayor cantidad de videos en la lista de trendings para el dataset de trendings de México.
+
+### Videos en la lista de trendings
+
+Gráfico de top 10 canales con mas videos en la lista de trendings:
 
 ```{r}
 library(tidyverse)
@@ -201,7 +221,9 @@ ggplot(top_10, aes(x = reorder(channelTitle, Freq), y = Freq)) +
   ylab('Cantidad de videos en trendings')
 ```
 
-grafico de acumulacion de cantidad de likes y dislikes del top 10 canales con mas videos en trendings
+### Likes y dislikes de videos en trendings
+
+Gráfico de acumulacion de cantidad de likes y dislikes del top 10 canales con mas videos en trendings:
 
 ```{r fig.width = 8}
 library(gridExtra)
@@ -227,7 +249,9 @@ dislikes_plot <- ggplot(top_10_accumulations,aes(x = reorder(channelTitle, Freq)
 grid.arrange(likes_plot, dislikes_plot)
 ```
 
-grafico de top 10 canales con mayor acumulacion de likes
+### Mayor cantidad de likes
+
+Gráfico de top 10 canales con mayor acumulación de likes:
 
 ```{r}
 
@@ -243,7 +267,9 @@ ggplot(likes_accumulation, aes(x = reorder(channelTitle, Accumulation), y = Accu
   ylab('Cantidad de videos en trendings')
 ```
 
-matriz de correlación entre columnas
+### Matriz de correlación
+
+Matriz de correlación entre columnas para el dataset de trendings de México.
 
 ```{r}
 library(corrplot)
@@ -282,9 +308,15 @@ corrplot(numeric_mx_dataset.cor, method = 'number')
  
 # dataset <- rbind(mx_dataset, us_dataset, br_dataset, ca_dataset, de_dataset, fr_dataset, gb_dataset, in_dataset, jp_dataset, kr_dataset, ru_dataset)
 ```
- 
-cantidad de videos en trending por pais
- 
+
+## Análisis comparativo con los demás paises
+
+Si bien el análisis exploratorio inicial se realizó tomando el dataset correspondiente a México, existen muchos otros paises dentro del dataset de trendings de Youtube, por lo cual se realizan algunos análisis generales a continuación.
+
+## Cantidad de videos en trending por pais
+
+La cantidad de videos en trending por cada pais se presenta en el siguiente gráfico:
+
 ```{r}
  
 # videos_amount <- group_by(dataset, country) |>
@@ -296,9 +328,11 @@ cantidad de videos en trending por pais
 #   coord_flip() +
 #   xlab("Pais") + ylab("Cantidad de videos")
 ```
- 
-cantidad de visitas de todos los videos en la lista de trendings por pais
- 
+
+## Cantidad de visitas por pais
+
+La cantidad de visitas de todos los videos en la lista de trendings por pais se presenta en el siguiente gráfico:
+
 ```{r}
  
 # view_count <- group_by(dataset, country) |>
