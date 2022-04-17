@@ -93,7 +93,7 @@ unique(mx_dataset)
 -   ratings_disabled (booleano que muestra si la habilidad de darle me gusta o no me gusta al video se encuentra disponible)
 -   description (descripción del video escrita por el usuario que lo subió).
 
-A continuación se cargará el segundo dataset de categorías:
+A continuación se cargará un segundo dataset asociado al anterior que contiene la información de las categorías de los videos:
 
 ```{r}
 library(jsonlite)
