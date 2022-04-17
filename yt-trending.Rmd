@@ -70,7 +70,7 @@ Una versión resumida del dataset se encuentra a continuación, en este resumen 
 summary(mx_dataset)
 ```
 
-El dataset usado, en ocasión del primer hito, corresponde a *mx_dataset*, el cual encapsula los videos más tendenciosos de YouTube en la región de México. Este dataset contiene, 121399 filas de información, dónde cada fila corresponde a los datos de un video que fue considerado para su captura debido a que estuvo en tendencia en algún momento de su existencia. Las columnas del dataset corresponde a:
+El dataset usado, en ocasión del primer hito, corresponde a **mx_dataset**, el cual encapsula los videos más tendenciosos de YouTube en la región de México. Este dataset contiene, 121399 filas de información, dónde cada fila corresponde a los datos de un video que fue considerado para su captura debido a que estuvo en tendencia en algún momento de su existencia. Las columnas del dataset corresponde a:
 
 ```{r}
 unique(mx_dataset)
@@ -102,7 +102,7 @@ mx_categories <- data.frame(mx_list_categories)
 head(mx_categories, n= 20)
 ```
 
-El archivo MX_category_id contiene cada categoría (categoryId) a la cual puede pertenecer cada video. Las columnas de este archivo son las siguientes:
+El archivo **MX_category_id.json** contiene las categorías (*categoryId*) a la que puede pertenecer cada uno de los videos. Las columnas de este archivo son las siguientes:
 
 -   kind (La clase correspondiente al dato, en este caso fijada a "youtube#videoCategoryListResponse")
 -   etag (Texto que corresponde al http etag de este recurso)
@@ -125,7 +125,7 @@ class(mx_categories$items.snippet)
 head(mx_categories$items.snippet)
 ```
 
-Existen un total de 30 categorías, estas son:
+En total este dataset contiene 30 categorías, a continuación se listan todas las categorías:
 
 ```{r}
 unique(mx_categories$items.snippet$title)
@@ -257,59 +257,57 @@ corrplot(numeric_mx_dataset.cor, method = 'number')
 ```
 
 ```{r}
-mx_dataset <- read.csv("./dataset/MX_youtube_trending_data.csv", encoding = "UTF-8")
-mx_dataset$country <- "MX"
-us_dataset <- read.csv("./dataset/US_youtube_trending_data.csv", encoding = "UTF-8")
-us_dataset$country <- "US"
-br_dataset <- read.csv("./dataset/BR_youtube_trending_data.csv", encoding = "UTF-8")
-br_dataset$country <- "BR"
-ca_dataset <- read.csv("./dataset/CA_youtube_trending_data.csv", encoding = "UTF-8")
-ca_dataset$country <- "CA"
-de_dataset <- read.csv("./dataset/DE_youtube_trending_data.csv", encoding = "UTF-8")
-de_dataset$country <- "DE"
-fr_dataset <- read.csv("./dataset/FR_youtube_trending_data.csv", encoding = "UTF-8")
-fr_dataset$country <- "FR"
-gb_dataset <- read.csv("./dataset/GB_youtube_trending_data.csv", encoding = "UTF-8")
-gb_dataset$country <- "BG"
-in_dataset <- read.csv("./dataset/IN_youtube_trending_data.csv", encoding = "UTF-8")
-in_dataset$country <- "IN"
-jp_dataset <- read.csv("./dataset/JP_youtube_trending_data.csv", encoding = "UTF-8")
-jp_dataset$country <- "JP"
-kr_dataset <- read.csv("./dataset/KR_youtube_trending_data.csv", encoding = "UTF-8")
-kr_dataset$country <- "KR"
-ru_dataset <- read.csv("./dataset/RU_youtube_trending_data.csv", encoding = "UTF-8")
-ru_dataset$country <- "RU"
-
-dataset <- rbind(mx_dataset, us_dataset, br_dataset, ca_dataset, de_dataset, fr_dataset, gb_dataset, in_dataset, jp_dataset, kr_dataset, ru_dataset)
-
-
+# mx_dataset <- read.csv("./dataset/MX_youtube_trending_data.csv", encoding = "UTF-8")
+# mx_dataset$country <- "MX"
+# us_dataset <- read.csv("./dataset/US_youtube_trending_data.csv", encoding = "UTF-8")
+# us_dataset$country <- "US"
+# br_dataset <- read.csv("./dataset/BR_youtube_trending_data.csv", encoding = "UTF-8")
+# br_dataset$country <- "BR"
+# ca_dataset <- read.csv("./dataset/CA_youtube_trending_data.csv", encoding = "UTF-8")
+# ca_dataset$country <- "CA"
+# de_dataset <- read.csv("./dataset/DE_youtube_trending_data.csv", encoding = "UTF-8")
+# de_dataset$country <- "DE"
+# fr_dataset <- read.csv("./dataset/FR_youtube_trending_data.csv", encoding = "UTF-8")
+# fr_dataset$country <- "FR"
+# gb_dataset <- read.csv("./dataset/GB_youtube_trending_data.csv", encoding = "UTF-8")
+# gb_dataset$country <- "BG"
+# in_dataset <- read.csv("./dataset/IN_youtube_trending_data.csv", encoding = "UTF-8")
+# in_dataset$country <- "IN"
+# jp_dataset <- read.csv("./dataset/JP_youtube_trending_data.csv", encoding = "UTF-8")
+# jp_dataset$country <- "JP"
+# kr_dataset <- read.csv("./dataset/KR_youtube_trending_data.csv", encoding = "UTF-8")
+# kr_dataset$country <- "KR"
+# ru_dataset <- read.csv("./dataset/RU_youtube_trending_data.csv", encoding = "UTF-8")
+# ru_dataset$country <- "RU"
+ 
+# dataset <- rbind(mx_dataset, us_dataset, br_dataset, ca_dataset, de_dataset, fr_dataset, gb_dataset, in_dataset, jp_dataset, kr_dataset, ru_dataset)
 ```
-
+ 
 cantidad de videos en trending por pais
-
+ 
 ```{r}
-
-videos_amount <- group_by(dataset, country) |>
-  summarize(amount = n())
-
-ggplot(videos_amount, aes(x = country, y = amount)) +
-  geom_bar(stat = 'identity') +
-  scale_y_continuous(labels = scales::comma) +
-  coord_flip() +
-  xlab("Pais") + ylab("Cantidad de videos")
+ 
+# videos_amount <- group_by(dataset, country) |>
+#   summarize(amount = n())
+ 
+# ggplot(videos_amount, aes(x = country, y = amount)) +
+#   geom_bar(stat = 'identity') +
+#   scale_y_continuous(labels = scales::comma) +
+#   coord_flip() +
+#   xlab("Pais") + ylab("Cantidad de videos")
 ```
-
+ 
 cantidad de visitas de todos los videos en la lista de trendings por pais
-
+ 
 ```{r}
-
-view_count <- group_by(dataset, country) |>
-  summarize(views = sum(view_count))
-
-ggplot(view_count, aes(x = country, y = views)) +
-  geom_bar(stat = 'identity') +
-  scale_y_continuous(labels = scales::comma) +
-  xlab("Pais") + ylab("Cantidad de visitas")
+ 
+# view_count <- group_by(dataset, country) |>
+#   summarize(views = sum(view_count))
+ 
+# ggplot(view_count, aes(x = country, y = views)) +
+#   geom_bar(stat = 'identity') +
+#   scale_y_continuous(labels = scales::comma) +
+#   xlab("Pais") + ylab("Cantidad de visitas")
 ```
 
 ------------------------------------------------------------------------
