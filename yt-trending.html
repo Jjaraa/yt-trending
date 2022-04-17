@@ -1794,6 +1794,22 @@ gusta o no me gusta al video se encuentra disponible)</li>
 <li>description (descripción del video escrita por el usuario que lo
 subió).</li>
 </ul>
+<p>También existe un archivo llamado CA_category_id el cual contiene
+cada categoría (categoryId) a la cual puede pertenecer cada video. Las
+columnas de este archivo son las siguientes:</p>
+<ul>
+<li>kind (La clase correspondiente al dato, en este caso fijada a
+“youtube#guideCategory”)</li>
+<li>etag (Texto que corresponde al http etag de este recurso)</li>
+<li>id (Texto, la identificación única que youtube usa para identificar
+la categoría)</li>
+<li>snippet (Detalles básicos de la categoría en cuestión)</li>
+<li>title (Descripción de la categoría)</li>
+<li>assignable (Valor booleano que denota si la categoría puede ser
+asiganda)</li>
+<li>channelId (Identificador del canal único que youtube otorga a esta
+categoría)</li>
+</ul>
 <p>A continuación se cargará el segundo dataset de categorías:</p>
 <pre class="r"><code>library(jsonlite)
 mx_list_categories &lt;- fromJSON(&quot;./dataset/MX_category_id.json&quot;)

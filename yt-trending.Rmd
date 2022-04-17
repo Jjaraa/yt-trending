@@ -83,6 +83,16 @@ El dataset usado, en ocasión del primer hito, corresponde a mx_dataset, el cual
 -   ratings_disabled (booleano que muestra si la habilidad de darle me gusta o no me gusta al video se encuentra disponible)
 -   description (descripción del video escrita por el usuario que lo subió).
 
+También existe un archivo llamado CA_category_id el cual contiene cada categoría (categoryId) a la cual puede pertenecer cada video. Las columnas de este archivo son las siguientes:
+
+-   kind (La clase correspondiente al dato, en este caso fijada a "youtube#guideCategory")
+-   etag (Texto que corresponde al http etag de este recurso)
+-   id (Texto, la identificación única que youtube usa para identificar la categoría)
+-   snippet (Detalles básicos de la categoría en cuestión)
+-   title (Descripción de la categoría)
+-   assignable (Valor booleano que denota si la categoría puede ser asiganda)
+-   channelId (Identificador del canal único que youtube otorga a esta categoría)
+
 A continuación se cargará el segundo dataset de categorías:
 
 ```{r}
