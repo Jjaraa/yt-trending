@@ -197,7 +197,13 @@ ggplot(mx_dataset, aes(x = view_count, y = comment_count)) +
   xlab("Cantidad de visitas") + ylab("Cantidad de comentarios")
 ```
 
-gráfico de top 10 canales con mas videos en la lista de trendings
+## Comparativa de canales
+
+A continuación se realizará un análisis a los 10 canales con mayor cantidad de videos en la lista de trendings para el dataset de trendings de México.
+
+### Videos en la lista de trendings
+
+Gráfico de top 10 canales con mas videos en la lista de trendings:
 
 ```{r}
 library(tidyverse)
@@ -215,7 +221,9 @@ ggplot(top_10, aes(x = reorder(channelTitle, Freq), y = Freq)) +
   ylab('Cantidad de videos en trendings')
 ```
 
-grafico de acumulacion de cantidad de likes y dislikes del top 10 canales con mas videos en trendings
+### Likes y dislikes de videos en trendings
+
+Gráfico de acumulacion de cantidad de likes y dislikes del top 10 canales con mas videos en trendings:
 
 ```{r fig.width = 8}
 library(gridExtra)
@@ -241,7 +249,9 @@ dislikes_plot <- ggplot(top_10_accumulations,aes(x = reorder(channelTitle, Freq)
 grid.arrange(likes_plot, dislikes_plot)
 ```
 
-grafico de top 10 canales con mayor acumulacion de likes
+### Mayor cantidad de likes
+
+Gráfico de top 10 canales con mayor acumulación de likes:
 
 ```{r}
 
