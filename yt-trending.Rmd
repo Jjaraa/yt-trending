@@ -229,6 +229,12 @@ mean(mx_dataset$comment_count)
 
 Para el caso de los comentarios, el promedio de estos es de 11,987 comentarios. Una cantidad superior a la de dislikes promedios, pero inferior a la de likes promedios.
 
+### Comparativa final
+
+```{r}
+data.frame(c("Prom likes","Prom dislikes", "Prom comentarios"), c(mean(mx_dataset$likes),mean(mx_dataset$dislikes),mean(mx_dataset$comment_count)))
+```
+
 ## Comparativa de canales
 
 A continuación se realizará un análisis a los 10 canales con mayor cantidad de videos en la lista de trendings para el dataset de trendings de México.
