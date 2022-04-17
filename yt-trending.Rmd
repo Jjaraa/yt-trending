@@ -165,6 +165,12 @@ ggplot(mx_categories, aes(x = categoryTitle)) +
 
 Dentro del análisis exploratorio de los datos se contempla un análisis sobre los likes, dislikes y comentarios para el dataset de trendings de México.
 
+Es importante mencionar que los análisis siguientes se realizaran en comparación a la cantidad de visitas de los videos, que cuentan con una media de 2.249.624 visitas.
+
+```{r}
+mean(mx_dataset$view_count)
+```
+
 ### Visitas vs likes
 
 La cantidad de las visitas vs likes se presenta en el siguiente gráfico de disperción:
@@ -175,6 +181,15 @@ ggplot(mx_dataset, aes(x = view_count, y = likes)) +
   geom_point() +
   xlab("Cantidad de visitas") + ylab("Cantidad de likes")
 ```
+
+Donde se aprecia que a medida que las visitas aumentan, la cantidad de likes tambien aumenta, y se percibe al observar el gráfico que su comportamiento podría ser lineal.
+
+
+```{r}
+mean(mx_dataset$likes)
+```
+
+Es interesante mencionar además, que la cantidad de likes promedio para el caso de México es de 160.530 likes.
 
 ### Visitas vs dislikes
 
@@ -187,6 +202,15 @@ ggplot(mx_dataset, aes(x = view_count, y = dislikes)) +
   xlab("Cantidad de visitas") + ylab("Cantidad de dislikes")
 ```
 
+En este gráfico ocurre una situación interesante. Si bien a medida que los videos obtienen mayor vista tambien lo hacen los dislikes, se puede apreciar que la cantidad de dislikes oscina en la mitad de la muestra, y posteriormente se observa una baja de estos dislikes en los videos más vistos.
+
+
+```{r}
+mean(mx_dataset$dislikes)
+```
+
+Es interesante mencionar además, que la cantidad de dislikes promedio para el caso de México es de 2.322 likes, muy inferior a la cantidad de likes promedio.
+
 ### Visitas vs comentarios
 
 La cantidad de visitas vs cantidad de comentarios se presenta de la siguiente manera:
@@ -196,6 +220,14 @@ ggplot(mx_dataset, aes(x = view_count, y = comment_count)) +
   geom_point() +
   xlab("Cantidad de visitas") + ylab("Cantidad de comentarios")
 ```
+
+Para este caso, la cantidad de comentarios oscila en mayor medida que en los casos anteriores en la mitad de la muestra, no obteniendo un patrón claro, pero a medida que la cantidad de vistas aumenta, la cantidad de comentarios también lo hacen, observablemente en el gráfico, de manera lineal.
+
+```{r}
+mean(mx_dataset$comment_count)
+```
+
+Para el caso de los comentarios, el promedio de estos es de 11,987 comentarios. Una cantidad superior a la de dislikes promedios, pero inferior a la de likes promedios.
 
 ## Comparativa de canales
 
