@@ -70,7 +70,7 @@ Una versión resumida del dataset se encuentra a continuación, en este resumen 
 summary(mx_dataset)
 ```
 
-El dataset usado, en ocasión del primer hito, corresponde a mx_dataset, el cual encapsula los videos más tendenciosos de YouTube en la región de México. Este dataset contiene, 121399 filas de información, dónde cada fila corresponde a los datos de un video que fue considerado para su captura debido a que estuvo en tendencia en algún momento de su existencia. Las columnas del dataset corresponde a:
+El dataset usado, en ocasión del primer hito, corresponde a *mx_dataset*, el cual encapsula los videos más tendenciosos de YouTube en la región de México. Este dataset contiene, 121399 filas de información, dónde cada fila corresponde a los datos de un video que fue considerado para su captura debido a que estuvo en tendencia en algún momento de su existencia. Las columnas del dataset corresponde a:
 
 ```{r}
 unique(mx_dataset)
@@ -93,16 +93,6 @@ unique(mx_dataset)
 -   ratings_disabled (booleano que muestra si la habilidad de darle me gusta o no me gusta al video se encuentra disponible)
 -   description (descripción del video escrita por el usuario que lo subió).
 
-También existe un archivo llamado CA_category_id el cual contiene cada categoría (categoryId) a la cual puede pertenecer cada video. Las columnas de este archivo son las siguientes:
-
--   kind (La clase correspondiente al dato, en este caso fijada a "youtube#guideCategory")
--   etag (Texto que corresponde al http etag de este recurso)
--   id (Texto, la identificación única que youtube usa para identificar la categoría)
--   snippet (Detalles básicos de la categoría en cuestión)
--   title (Descripción de la categoría)
--   assignable (Valor booleano que denota si la categoría puede ser asiganda)
--   channelId (Identificador del canal único que youtube otorga a esta categoría)
-
 A continuación se cargará el segundo dataset de categorías:
 
 ```{r}
@@ -112,7 +102,17 @@ mx_categories <- data.frame(mx_list_categories)
 head(mx_categories, n= 20)
 ```
 
-Dimensiones del conjunto de categorías:
+El archivo MX_category_id contiene cada categoría (categoryId) a la cual puede pertenecer cada video. Las columnas de este archivo son las siguientes:
+
+-   kind (La clase correspondiente al dato, en este caso fijada a "youtube#videoCategoryListResponse")
+-   etag (Texto que corresponde al http etag de este recurso)
+-   id (Texto, la identificación única que YouTube usa para identificar la categoría)
+-   snippet (Detalles básicos de la categoría en cuestión)
+-   title (Descripción de la categoría)
+-   assignable (Valor booleano que denota si la categoría puede ser asiganda)
+-   channelId (Identificador del canal único que YouTube otorga a esta categoría)
+
+Las dimensiones de este dataset son, 31 filas y 6 columnas.
 
 ```{r}
 dim(mx_categories)
@@ -125,13 +125,11 @@ class(mx_categories$items.snippet)
 head(mx_categories$items.snippet)
 ```
 
-Existen un total de 30 categorías, son las siguientes:
+Existen un total de 30 categorías, estas son:
 
 ```{r}
 unique(mx_categories$items.snippet$title)
 ```
-
-*Explicacion de las categorias...*
 
 El dataset *mx_dataset* contiene valores nulos o en blanco en las columna *description* y *tags*. Se encontraron 6819 valores faltantes en la columna *description* y 20407 en la columna *tags*.
 
