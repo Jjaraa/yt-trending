@@ -161,9 +161,48 @@ ggplot(mx_categories, aes(x = categoryTitle)) +
   xlab("Categoria") + ylab("Cantidad de videos")
 ```
 
+Un análisis a simple vista del gráfico denota que existen dos categorías que acumulan la mayor cantidad de videos: Music y Entertainment. Podemos obtener el promedio de la cantidad de videos por categoría:
+
+```{r}
+#Se obtiene la cantidad de videos por cada categoría
+
+travel_and_events <- nrow(mx_categories[mx_categories$categoryId == 19,])
+sports <- nrow(mx_categories[mx_categories$categoryId == 17,])
+science_and_technology <- nrow(mx_categories[mx_categories$categoryId == 28,])
+pets_and_animals <- nrow(mx_categories[mx_categories$categoryId == 15,])
+people_and_blogs <- nrow(mx_categories[mx_categories$categoryId == 22,])
+news_and_politics <- nrow(mx_categories[mx_categories$categoryId == 25,])
+music <- nrow(mx_categories[mx_categories$categoryId == 10,])
+howto_and_style <- nrow(mx_categories[mx_categories$categoryId == 26,])
+gaming <- nrow(mx_categories[mx_categories$categoryId == 20,])
+film_and_animation <- nrow(mx_categories[mx_categories$categoryId == 1,])
+entertainment <- nrow(mx_categories[mx_categories$categoryId == 24,])
+education <- nrow(mx_categories[mx_categories$categoryId == 27,])
+comedy <- nrow(mx_categories[mx_categories$categoryId == 23,])
+autos_and_vehicles <- nrow(mx_categories[mx_categories$categoryId == 2,])
+
+#Se crea un vector que contiene todas las categorías con su cantidad de videos
+categoria <- c(travel_and_events, sports, science_and_technology, pets_and_animals, people_and_blogs, news_and_politics, music, howto_and_style, gaming, film_and_animation, entertainment, education, comedy, autos_and_vehicles)
+
+#Se obtiene el promedio de videos por categoria
+mean(categoria)
+
+#Se obtiene la media de la cantidad de videos por categoría
+median(categoria)
+
+```
+
+Se obtiene un valor de 8661 videos por categoría en promedio. Pero debido a que este dos categorías contienen la mayor cantidad de videos este valor es deceptivo. Tambien al considerar la media se obtiene el valor de 4352. Dónde se considera que la mitad de las categorías estan bajo ese valor (en cantidad de videos) y la otra mitad sobre ese mismo valor.
+
 ## Cantidad de likes, dislikes y comentarios
 
 Dentro del análisis exploratorio de los datos se contempla un análisis sobre los likes, dislikes y comentarios para el dataset de trendings de México.
+
+Es importante mencionar que los análisis siguientes se realizaran en comparación a la cantidad de visitas de los videos, que cuentan con una media de 2.249.624 visitas.
+
+```{r}
+mean(mx_dataset$view_count)
+```
 
 ### Visitas vs likes
 
@@ -175,6 +214,15 @@ ggplot(mx_dataset, aes(x = view_count, y = likes)) +
   xlab("Cantidad de visitas") + ylab("Cantidad de likes")
 ```
 
+Donde se aprecia que a medida que las visitas aumentan, la cantidad de likes tambien aumenta, y se percibe al observar el gráfico que su comportamiento podría ser lineal.
+
+
+```{r}
+mean(mx_dataset$likes)
+```
+
+Es interesante mencionar además, que la cantidad de likes promedio para el caso de México es de 160.530 likes.
+
 ### Visitas vs dislikes
 
 La cantidad de las visitas vs dislikes se presenta en el siguiente gráfico de disperción:
@@ -185,6 +233,15 @@ ggplot(mx_dataset, aes(x = view_count, y = dislikes)) +
   xlab("Cantidad de visitas") + ylab("Cantidad de dislikes")
 ```
 
+En este gráfico ocurre una situación interesante. Si bien a medida que los videos obtienen mayor vista tambien lo hacen los dislikes, se puede apreciar que la cantidad de dislikes oscina en la mitad de la muestra, y posteriormente se observa una baja de estos dislikes en los videos más vistos.
+
+
+```{r}
+mean(mx_dataset$dislikes)
+```
+
+Es interesante mencionar además, que la cantidad de dislikes promedio para el caso de México es de 2.322 likes, muy inferior a la cantidad de likes promedio.
+
 ### Visitas vs comentarios
 
 La cantidad de visitas vs cantidad de comentarios se presenta de la siguiente manera:
@@ -193,6 +250,20 @@ La cantidad de visitas vs cantidad de comentarios se presenta de la siguiente ma
 ggplot(mx_dataset, aes(x = view_count, y = comment_count)) +
   geom_point() +
   xlab("Cantidad de visitas") + ylab("Cantidad de comentarios")
+```
+
+Para este caso, la cantidad de comentarios oscila en mayor medida que en los casos anteriores en la mitad de la muestra, no obteniendo un patrón claro, pero a medida que la cantidad de vistas aumenta, la cantidad de comentarios también lo hacen, observablemente en el gráfico, de manera lineal.
+
+```{r}
+mean(mx_dataset$comment_count)
+```
+
+Para el caso de los comentarios, el promedio de estos es de 11,987 comentarios. Una cantidad superior a la de dislikes promedios, pero inferior a la de likes promedios.
+
+### Comparativa final
+
+```{r}
+data.frame(c("Prom likes","Prom dislikes", "Prom comentarios"), c(mean(mx_dataset$likes),mean(mx_dataset$dislikes),mean(mx_dataset$comment_count)))
 ```
 
 ## Comparativa de canales
