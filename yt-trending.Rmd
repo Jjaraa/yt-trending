@@ -262,11 +262,13 @@ mean(mx_dataset$comment_count)
 
 Para el caso de los comentarios, el promedio de estos es de 11,987 comentarios. Una cantidad superior a la de dislikes promedios, pero inferior a la de likes promedios.
 
-### Comparativa final
+### Resumen final de visitas
 
 ```{r}
-data.frame(c("Prom likes","Prom dislikes", "Prom comentarios"), c(mean(mx_dataset$likes),mean(mx_dataset$dislikes),mean(mx_dataset$comment_count)))
+data.frame(Atributo = c("visitas","likes","dislikes", "comentarios"), Promedio = c(mean(mx_dataset$view_count),mean(mx_dataset$likes),mean(mx_dataset$dislikes),mean(mx_dataset$comment_count)))
 ```
+
+Como resultado, para el caso de México se aprecia que la cantidad de likes corresponde a casi 70 veces más que la cantidad de dislikes, además de que la cantidad de comentarios es muy superior a la cantidad de dislikes. Lo anterior corresponde a un indicativo de la participación de los usuarios en México sobre los videos tanto positivos como negativos, donde los usuarios mexicanos interactúan de forma mayormente positiva a los videos más vistos.
 
 ## Comparativa de canales
 
