@@ -418,6 +418,7 @@ ggplot(videos_amount, aes(x = country, y = amount)) +
   coord_flip() +
   xlab("País") + ylab("Cantidad de videos")
 ```
+
 Se puede observar que la mayoría de países tiene una cantidad parecida de videos. Esto indica que los conjuntos de datos de cada país tienen semejante cantidad de datos, excepto en los casos de Rusia, Corea e India.
 Los valores exactos de cantidad de videos por cada país se muestran en la siguiente tabla:
 
