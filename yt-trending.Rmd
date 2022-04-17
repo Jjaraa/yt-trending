@@ -52,19 +52,29 @@ mx_dataset <- read.csv("./dataset/MX_youtube_trending_data.csv", encoding = "UTF
 head(mx_dataset, n = 20)
 ```
 
-Las dimensiones del dataset son, 121.399 filas y 16 columnas. 
+Las dimensiones del dataset son, 121.399 filas y 16 columnas.
 
 ```{r}
 dim(mx_dataset)
 ```
 
-Una versión resumida del dataset se encuentra a continuación:
+Una versión resumida del dataset se encuentra a continuación, en este resumen se indican:
+
+-   Cantidad de items en la columna.
+
+-   La clase y el modo de los valores de la columna.
+
+-   Si la columna es de clase tipo numérico entrega valores estadísticos como: valor mínimo y máximo, la media y mediana, y los cuartiles 1 y 3.
 
 ```{r}
 summary(mx_dataset)
 ```
 
 El dataset usado, en ocasión del primer hito, corresponde a mx_dataset, el cual encapsula los videos más tendenciosos de YouTube en la región de México. Este dataset contiene, 121399 filas de información, dónde cada fila corresponde a los datos de un video que fue considerado para su captura debido a que estuvo en tendencia en algún momento de su existencia. Las columnas del dataset corresponde a:
+
+```{r}
+unique(mx_dataset)
+```
 
 -   video_id (la id única de cada video en YouTube que se encuentra después de www.youtube.com/watch?)
 -   title (el título del video)
@@ -105,7 +115,7 @@ class(mx_categories$items.snippet)
 head(mx_categories$items.snippet)
 ```
 
-Existen un total de 30 categorías, son las siguientes: 
+Existen un total de 30 categorías, son las siguientes:
 
 ```{r}
 unique(mx_categories$items.snippet$title)
@@ -114,18 +124,19 @@ unique(mx_categories$items.snippet$title)
 *Explicacion de las categorias...*
 
 El dataset *mx_dataset* contiene valores nulos o en blanco en las columna *description* y *tags*. Se encontraron 6819 valores faltantes en la columna *description* y 20407 en la columna *tags*.
+
 ```{r}
 null_values_dataset <- sapply(mx_dataset, function(x) is.na(x) | x == "" | x == "[None]")
 colSums(null_values_dataset)
 ```
 
 El dataset *mx_categories* no contiene valores nulos o en blanco en ninguna de sus columnas. Esto incluye las columnas que se encuentran dentro del dataframe de la columna *items.snippet*.
+
 ```{r}
 sapply(mx_categories, function(x) any(is.na(x) | x == ""))
 ```
 
-
----
+------------------------------------------------------------------------
 
 grafico de cantidad de videos por categoria
 
@@ -163,7 +174,6 @@ ggplot(mx_dataset, aes(x = view_count, y = comment_count)) +
   geom_point() +
   xlab("Cantidad de visitas") + ylab("Cantidad de comentarios")
 ```
-
 
 gráfico de top 10 canales con mas videos en la lista de trendings
 
@@ -294,8 +304,7 @@ ggplot(view_count, aes(x = country, y = views)) +
   xlab("Pais") + ylab("Cantidad de visitas")
 ```
 
-
----
+------------------------------------------------------------------------
 
 # Preguntas y problemas
 
