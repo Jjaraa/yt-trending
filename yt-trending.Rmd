@@ -208,7 +208,6 @@ mean(mx_dataset$view_count)
 
 La cantidad de las visitas vs likes se presenta en el siguiente gráfico de disperción:
 
-
 ```{r}
 ggplot(mx_dataset, aes(x = view_count, y = likes)) +
   geom_point() +
@@ -226,8 +225,7 @@ Es interesante mencionar además, que la cantidad de likes promedio para el caso
 
 ### Visitas vs dislikes
 
-La cantidad de las visitas vs dislikes se presenta en el siguiente gráfico de disperción: 
-
+La cantidad de las visitas vs dislikes se presenta en el siguiente gráfico de disperción:
 
 ```{r}
 ggplot(mx_dataset, aes(x = view_count, y = dislikes)) +
@@ -355,69 +353,131 @@ numeric_mx_dataset.cor <- cor(numeric_mx_dataset)
 corrplot(numeric_mx_dataset.cor, method = 'number')
 ```
 
-```{r}
-# mx_dataset <- read.csv("./dataset/MX_youtube_trending_data.csv", encoding = "UTF-8")
-# mx_dataset$country <- "MX"
-# us_dataset <- read.csv("./dataset/US_youtube_trending_data.csv", encoding = "UTF-8")
-# us_dataset$country <- "US"
-# br_dataset <- read.csv("./dataset/BR_youtube_trending_data.csv", encoding = "UTF-8")
-# br_dataset$country <- "BR"
-# ca_dataset <- read.csv("./dataset/CA_youtube_trending_data.csv", encoding = "UTF-8")
-# ca_dataset$country <- "CA"
-# de_dataset <- read.csv("./dataset/DE_youtube_trending_data.csv", encoding = "UTF-8")
-# de_dataset$country <- "DE"
-# fr_dataset <- read.csv("./dataset/FR_youtube_trending_data.csv", encoding = "UTF-8")
-# fr_dataset$country <- "FR"
-# gb_dataset <- read.csv("./dataset/GB_youtube_trending_data.csv", encoding = "UTF-8")
-# gb_dataset$country <- "BG"
-# in_dataset <- read.csv("./dataset/IN_youtube_trending_data.csv", encoding = "UTF-8")
-# in_dataset$country <- "IN"
-# jp_dataset <- read.csv("./dataset/JP_youtube_trending_data.csv", encoding = "UTF-8")
-# jp_dataset$country <- "JP"
-# kr_dataset <- read.csv("./dataset/KR_youtube_trending_data.csv", encoding = "UTF-8")
-# kr_dataset$country <- "KR"
-# ru_dataset <- read.csv("./dataset/RU_youtube_trending_data.csv", encoding = "UTF-8")
-# ru_dataset$country <- "RU"
- 
-# dataset <- rbind(mx_dataset, us_dataset, br_dataset, ca_dataset, de_dataset, fr_dataset, gb_dataset, in_dataset, jp_dataset, kr_dataset, ru_dataset)
-```
+## Análisis comparativo de todos los países
 
-## Análisis comparativo con los demás paises
+Si bien el análisis exploratorio inicial se realizó tomando el dataset correspondiente a México, existen muchos otros países dentro del dataset de trendings de YouTube, por lo cual se realizan algunos análisis generales a continuación.
 
-Si bien el análisis exploratorio inicial se realizó tomando el dataset correspondiente a México, existen muchos otros paises dentro del dataset de trendings de Youtube, por lo cual se realizan algunos análisis generales a continuación.
-
-## Cantidad de videos en trending por pais
-
-La cantidad de videos en trending por cada pais se presenta en el siguiente gráfico:
+Primero se cargan cada uno de los dataset de los países leyendo el archivo correspondiente.
 
 ```{r}
- 
-# videos_amount <- group_by(dataset, country) |>
-#   summarize(amount = n())
- 
-# ggplot(videos_amount, aes(x = country, y = amount)) +
-#   geom_bar(stat = 'identity') +
-#   scale_y_continuous(labels = scales::comma) +
-#   coord_flip() +
-#   xlab("Pais") + ylab("Cantidad de videos")
+mx_dataset <- read.csv("./dataset/MX_youtube_trending_data.csv", encoding = "UTF-8")
+us_dataset <- read.csv("./dataset/US_youtube_trending_data.csv", encoding = "UTF-8")
+br_dataset <- read.csv("./dataset/BR_youtube_trending_data.csv", encoding = "UTF-8")
+ca_dataset <- read.csv("./dataset/CA_youtube_trending_data.csv", encoding = "UTF-8")
+de_dataset <- read.csv("./dataset/DE_youtube_trending_data.csv", encoding = "UTF-8")
+fr_dataset <- read.csv("./dataset/FR_youtube_trending_data.csv", encoding = "UTF-8")
+gb_dataset <- read.csv("./dataset/GB_youtube_trending_data.csv", encoding = "UTF-8")
+in_dataset <- read.csv("./dataset/IN_youtube_trending_data.csv", encoding = "UTF-8")
+jp_dataset <- read.csv("./dataset/JP_youtube_trending_data.csv", encoding = "UTF-8")
+kr_dataset <- read.csv("./dataset/KR_youtube_trending_data.csv", encoding = "UTF-8")
+ru_dataset <- read.csv("./dataset/RU_youtube_trending_data.csv", encoding = "UTF-8")
 ```
 
-## Cantidad de visitas por pais
+El interprete indica que se encontraron valores nulos en los archivos de Francia y Japón. No realizamos ninguna acción frente a esta advertencia ya que solamente es una advertencia y es posible cargar correctamente el resto de los datos.
 
-La cantidad de visitas de todos los videos en la lista de trendings por pais se presenta en el siguiente gráfico:
+A continuación agregamos una columna llamada *country* a cada dataset para identificar el archivo (país) del que se obtuvo cada fila. Esto sera de utilidad para análisis posteriores.
 
 ```{r}
- 
-# view_count <- group_by(dataset, country) |>
-#   summarize(views = sum(view_count))
- 
-# ggplot(view_count, aes(x = country, y = views)) +
-#   geom_bar(stat = 'identity') +
-#   scale_y_continuous(labels = scales::comma) +
-#   xlab("Pais") + ylab("Cantidad de visitas")
+mx_dataset$country <- "MX"
+us_dataset$country <- "US"
+br_dataset$country <- "BR"
+ca_dataset$country <- "CA"
+de_dataset$country <- "DE"
+fr_dataset$country <- "FR"
+gb_dataset$country <- "BG"
+in_dataset$country <- "IN"
+jp_dataset$country <- "JP"
+kr_dataset$country <- "KR"
+ru_dataset$country <- "RU"
 ```
 
-------------------------------------------------------------------------
+Finalmente se unen todos los datos en un único dataframe para simplificar los análisis comparativos posteriores.
+
+```{r}
+dataset <- rbind(mx_dataset, us_dataset, br_dataset, ca_dataset, de_dataset, fr_dataset, gb_dataset, in_dataset, jp_dataset, kr_dataset, ru_dataset)
+```
+
+### Cantidad de videos en trending por país
+
+El siguiente gráfico muestra la cantidad de videos en trending por cada país, es decir, la cantidad de filas que contiene cada uno de los archivos leídos.
+
+```{r}
+videos_amount <- group_by(dataset, country) |>
+  summarize(amount = n())
+
+ggplot(videos_amount, aes(x = country, y = amount)) +
+  geom_bar(stat = 'identity') +
+  scale_y_continuous(labels = scales::comma) +
+  coord_flip() +
+  xlab("País") + ylab("Cantidad de videos")
+```
+Se puede observar que la mayoría de países tiene una cantidad parecida de videos. Esto indica que los conjuntos de datos de cada país tienen semejante cantidad de datos, excepto en los casos de Rusia, Corea e India.
+Los valores exactos de cantidad de videos por cada país se muestran en la siguiente tabla:
+
+```{r}
+arrange(videos_amount, desc(amount))
+```
+
+### Cantidad de visitas por pais
+
+La cantidad de visitas de todos los videos en la lista de trendings por país se presenta en el siguiente gráfico:
+
+```{r}
+view_count <- group_by(dataset, country) |>
+  summarize(views = sum(view_count))
+ 
+ggplot(view_count, aes(x = country, y = views)) +
+  geom_bar(stat = 'identity') +
+  scale_y_continuous(labels = scales::comma) +
+  coord_flip() +
+  xlab("Pais") + ylab("Cantidad de visitas")
+```
+Los valores reales por país se muestran en la siguiente tabla:
+
+```{r}
+arrange(view_count, desc(views))
+```
+Los resultados de este análisis son interesantes, ya que el país que mas visitas totales acumula es India, el país cuyo conjunto de datos contiene la menor cantidad de registros de dataset completo.
+
+### Canales con mas videos en la lista de tendencias
+
+El siguiente gráfico muestra el top 10 de los canales que tienen mas videos en las listas de tendencias de todos los países. Este análisis contempla el periodo temporal total del conjunto de datos.
+
+```{r}
+top_10_global <- group_by(dataset, channelTitle) |>
+  summarize(Freq = n(), country = first(country)) |>
+  arrange(desc(Freq)) |>
+  top_n(10, Freq)
+
+ggplot(top_10_global, aes(x = reorder(channelTitle, Freq), y = Freq)) +
+  geom_bar(stat = 'identity') +
+  coord_flip() +
+  xlab('Canal de YouTube') +
+  ylab('Cantidad de videos en trendings')
+```
+Lo interesante de este gráfico es ver la cantidad de videos en la lista de tendencias que tiene cada canal. Se puede notar que el top 3 tienen una diferencia pequeña en la cantidad de videos comparandolo con el resto de canales.
+
+Otro análisis interesante es identificar a que pais pertenece cada uno de los canales del top 10. A continuación se genera un gráfico circular que muestra, en porcentajes, los paises que estan presentes en el top 10.
+
+```{r}
+test <- group_by(top_10_global, country) |>
+  summarize(sum_videos = sum(Freq), country = first(country))
+
+test <- group_by(test, country) |>
+  mutate(percentage = sum(sum_videos)/sum(test$sum_videos)) |>
+  mutate(label = scales::percent(percentage))
+
+ggplot(test, aes(x = "", y = percentage, fill = country)) +
+  geom_col() +
+  geom_label(aes(label = label),
+             position = position_stack(vjust = 0.5),
+             show.legend = FALSE) +
+  coord_polar(theta = "y") +
+  guides(fill = guide_legend(title = "País")) +
+  theme_void()
+```
+
+Como muestra el gráfico, solo 3 países están en este top 10, siendo México el que tiene una mayoría importante respecto de Japón y Estados Unidos.
 
 # Preguntas y problemas
 
