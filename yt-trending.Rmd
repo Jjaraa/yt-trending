@@ -137,7 +137,9 @@ sapply(mx_categories, function(x) any(is.na(x) | x == ""))
 
 ---
 
-grafico de cantidad de videos por categoria
+## Cantidad de videos por categoria
+
+La cantidad de videos que tiene cada categoría para el dataset de México se presenta en el siguiente gráfico:
 
 ```{r}
 library(ggplot2)
@@ -150,7 +152,14 @@ ggplot(mx_categories, aes(x = categoryTitle)) +
   xlab("Categoria") + ylab("Cantidad de videos")
 ```
 
-grafico de dispersion de la cantidad de visitas vs cantidad de likes
+## Cantidad de likes, dislikes y comentarios
+
+Dentro del análisis exploratorio de los datos se contempla un análisis sobre los likes, dislikes y comentarios para el dataset de trendings de México.
+
+### Visitas vs likes
+
+La cantidad de las visitas vs likes se presenta en el siguiente gráfico de disperción:
+
 
 ```{r}
 ggplot(mx_dataset, aes(x = view_count, y = likes)) +
@@ -158,7 +167,10 @@ ggplot(mx_dataset, aes(x = view_count, y = likes)) +
   xlab("Cantidad de visitas") + ylab("Cantidad de likes")
 ```
 
-grafico de dispersion de cantidad de visitas vs cantidad de dislikes
+### Visitas vs dislikes
+
+La cantidad de las visitas vs dislikes se presenta en el siguiente gráfico de disperción: 
+
 
 ```{r}
 ggplot(mx_dataset, aes(x = view_count, y = dislikes)) +
@@ -166,7 +178,9 @@ ggplot(mx_dataset, aes(x = view_count, y = dislikes)) +
   xlab("Cantidad de visitas") + ylab("Cantidad de dislikes")
 ```
 
-grafico de dispersion de cantidad de visitas vs cantidad de comentarios
+### Visitas vs comentarios
+
+La cantidad de visitas vs cantidad de comentarios se presenta de la siguiente manera:
 
 ```{r}
 ggplot(mx_dataset, aes(x = view_count, y = comment_count)) +
