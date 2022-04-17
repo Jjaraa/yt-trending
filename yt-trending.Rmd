@@ -211,6 +211,8 @@ La cantidad de las visitas vs likes se presenta en el siguiente gráfico de disp
 ```{r}
 ggplot(mx_dataset, aes(x = view_count, y = likes)) +
   geom_point() +
+  scale_y_continuous(labels = scales::comma) +
+  scale_x_continuous(labels = scales::comma) +
   xlab("Cantidad de visitas") + ylab("Cantidad de likes")
 ```
 
@@ -230,6 +232,8 @@ La cantidad de las visitas vs dislikes se presenta en el siguiente gráfico de d
 ```{r}
 ggplot(mx_dataset, aes(x = view_count, y = dislikes)) +
   geom_point() +
+  scale_y_continuous(labels = scales::comma) +
+  scale_x_continuous(labels = scales::comma) +
   xlab("Cantidad de visitas") + ylab("Cantidad de dislikes")
 ```
 
@@ -249,6 +253,8 @@ La cantidad de visitas vs cantidad de comentarios se presenta de la siguiente ma
 ```{r}
 ggplot(mx_dataset, aes(x = view_count, y = comment_count)) +
   geom_point() +
+  scale_y_continuous(labels = scales::comma) +
+  scale_x_continuous(labels = scales::comma) +
   xlab("Cantidad de visitas") + ylab("Cantidad de comentarios")
 ```
 
@@ -332,6 +338,7 @@ likes_accumulation <- group_by(mx_dataset, channelTitle) |>
   top_n(10)
 
 ggplot(likes_accumulation, aes(x = reorder(channelTitle, Accumulation), y = Accumulation)) +
+  scale_y_continuous(labels = scales::comma) +
   geom_bar(stat = 'identity') +
   coord_flip() +
   xlab('Canal de YouTube') +
