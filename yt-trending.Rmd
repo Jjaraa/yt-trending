@@ -26,8 +26,7 @@ En base a estos criterios, es posible que se encuentren videos con bajas visitas
 
 El conjunto de datos seleccionado, [**YouTube Trending Video Dataset (updated daily)**](https://www.kaggle.com/datasets/rsrishav/youtube-trending-video-dataset/versions/610) contiene la información de estas listas de tendencias de 11 países: Brasil, Canadá, Alemania, Francia, Gran Bretaña, India, Japón, Corea del sur, México, Rusia y Estados Unidos. Algunos de los datos que incluye son el título del video, la fecha de subida del video, la cantidad de likes y de visitas, etc. El conjunto de datos es actualizado con una frecuencia diaria y se agregan hasta 200 videos nuevos en las listas de tendencias por día. Se utilizará la versión 610 del conjunto de datos, la cual contiene datos actualizados hasta el día 7 de Abril de 2022.
 
-
-El creador de este conjunto de datos propone algunos usos:
+El estudio de este conjunto de datos resulta interesante, ya que al ser datos de una aplicación tan grande se tienen datos que incluyen la interacción de miles de millones de personas a escala global. Para esto el creador del conjunto de datos propone algunos usos:
 
 -   Análisis de sentimientos.
 -   Categorizar los videos basados en sus comentarios o estadísticas.
