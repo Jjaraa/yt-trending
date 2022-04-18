@@ -324,7 +324,7 @@ ggplot(top_10, aes(x = reorder(channelTitle, Freq), y = Freq)) +
 Gráfico de acumulacion de cantidad de likes y dislikes del top 10 canales con mas videos en trendings:
 
 ```{r fig.width = 8}
-install.packages("gridExtra")
+install.packages("gridExtra", repos = "http://cran.us.r-project.org")
 library(gridExtra)
 library("scales")
 top_10_accumulations <- group_by(mx_dataset, channelTitle) |>
@@ -501,6 +501,8 @@ El proyecto se documenta en un repositorio de GitHub, donde se podrá acceder en
 # Responsabilidades del grupo de trabajo
 
 **Sebastian Pardo**: Estuvo a cargo de la redacción de las secciones: Introducción y Preguntas y Preguntas. Se encargó del desarrollo del análisis inicial del archivo *MX_category_id.json*, la matriz de correlación del dataset de Mexico y los gráficos: *Cantidad de videos por categoría*, *Visitas vs likes*, *Visitas vs dislikes*, *Visitas vs comentarios*, *Top 10 canales con mas videos*, *Matriz de correlación entre los atributos*, *Cantidad de videos en trending por país*, *Cantidad de visitas por país* y *Canales con mas videos en la lista de tentendias (global)* . Finalmente se hizo cargo del desarrollo de la subsección *Análisis comparativo de todos los países*
+
+**Mauricio Campos**: Se encargó de redactar y explicar cada columna del dataset usado para el desarrollo del informe (mx_dataset y MX_category_id). También se encargó del desarrollo exploratorio de la sección *Cantidad de videos por categoria*. 
 
 # Referencias
 
