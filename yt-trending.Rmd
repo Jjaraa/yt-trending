@@ -470,6 +470,20 @@ Lo interesante de este gráfico es ver la cantidad de videos en la lista de tend
 
 # Preguntas y problemas
 
+## Preguntas
+
+En base a los resultados obtenidos de los análisis realizados y teniendo en cuenta la motivacion descrita al inicio de este documento, nos planteamos dar respuesta a las siguientes preguntas:
+
+1. ¿Existe un patrón en las portadas de videos de los canales más famosos?
+2. ¿Existe una cultura general de YouTube que determina las tendencias de los videos, o depende netamente de la cultura del país de dónde se origina?
+3. ¿Se pueden predecir la cantidad de visitas que tendrá un video?
+
+
+## Problemas
+
+No existe una estandarización del concepto “interacción” para un determinado vídeo. Ya que un video “famoso” se compone por una cierta cantidad de interacciones, que están formadas por likes, dislikes, visitas y comentarios. No se identifica cual de estos criterios tiene mayor o igual valor a los otros.
+
+
 # Repositorio GitHub
 
 El proyecto se documenta en un repositorio de GitHub, donde se podrá acceder en el siguiente link:
