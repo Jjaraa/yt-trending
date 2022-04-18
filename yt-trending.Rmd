@@ -11,7 +11,10 @@ output:
 
 # Introducción
 
-De acuerdo con Google "la pestaña de tendencias de YouTube permite que los usuarios descubran las novedades de YouTube" [1]. Esta es una lista común compuesta de videos actuales que se muestra a todos los usuarios de un mismo país. YouTube mantiene listas de tendencias diferentes para cada país, las cuales actualiza con una frecuencia de 15 minutos. Si bien Google no ha hecho público el método para calcular las listas de tendencias, ha comunicado que buscan seleccionar videos que representen la actualidad de YouTube y sean relevantes para los usuarios del país correspondiente. Algunos de los factores que tienen en cuenta son:
+YouTube es una aplicación web que ofrece servicios para compartir y hacer streaming de videos bajo demanda o en directo. Es una filial de Google LLC, y sin duda una de las aplicaciones mas reconocidas y utilizadas a nivel mundial, de acuerdo con Statista, YouTube es la 2da red social mas popular a enero de 2022 [1], con cerca de 2,6 mil millones de usuarios activos mensualmente y una proyeccion de 2,8 mil millones de usuarios para el año 2025 [2].
+Cada minuto se suben a esta plataforma mas de 500 horas de contenido de videos [3], y en este mismo tiempo se consumen alrededor de 700 horas de contenido multimedia [4].
+
+De acuerdo con Google "la pestaña de tendencias de YouTube permite que los usuarios descubran las novedades de YouTube" [5]. Esta es una lista común compuesta de videos actuales que se muestra a todos los usuarios de un mismo país. YouTube mantiene listas de tendencias diferentes para cada país, las cuales actualiza con una frecuencia de 15 minutos. Si bien Google no ha hecho público el método para calcular las listas de tendencias, ha comunicado que buscan seleccionar videos que representen la actualidad de YouTube y sean relevantes para los usuarios del país correspondiente. Algunos de los factores que tienen en cuenta son:
 
 -   La cantidad de tiempo que lleva el video en la plataforma.
 -   Las visitas del video.
@@ -22,6 +25,7 @@ De acuerdo con Google "la pestaña de tendencias de YouTube permite que los usua
 En base a estos criterios, es posible que se encuentren videos con bajas visitas en posiciones altas de la lista, si estas se comparan con otros videos de la misma lista.
 
 El conjunto de datos seleccionado, [**YouTube Trending Video Dataset (updated daily)**](https://www.kaggle.com/datasets/rsrishav/youtube-trending-video-dataset/versions/610) contiene la información de estas listas de tendencias de 11 países: Brasil, Canadá, Alemania, Francia, Gran Bretaña, India, Japón, Corea del sur, México, Rusia y Estados Unidos. Algunos de los datos que incluye son el título del video, la fecha de subida del video, la cantidad de likes y de visitas, etc. El conjunto de datos es actualizado con una frecuencia diaria y se agregan hasta 200 videos nuevos en las listas de tendencias por día. Se utilizará la versión 610 del conjunto de datos, la cual contiene datos actualizados hasta el día 7 de Abril de 2022.
+
 
 El creador de este conjunto de datos propone algunos usos:
 
@@ -492,4 +496,11 @@ El proyecto se documenta en un repositorio de GitHub, donde se podrá acceder en
 
 # Referencias
 
-[1] <https://support.google.com/youtube/answer/7239739?hl=es-419>
+[1] <https://www.statista.com/statistics/272014/global-social-networks-ranked-by-number-of-users/>
+[2] <https://www.statista.com/forecasts/1144088/youtube-users-in-the-world>
+[3] <https://www.statista.com/statistics/195140/new-user-generated-content-uploaded-by-users-per-minute/>
+[4] <https://www.statista.com/statistics/259477/hours-of-video-uploaded-to-youtube-every-minute/>
+[5] <https://support.google.com/youtube/answer/7239739?hl=es-419>
+
+
+
