@@ -467,27 +467,6 @@ ggplot(top_10_global, aes(x = reorder(channelTitle, Freq), y = Freq)) +
 
 Lo interesante de este gráfico es ver la cantidad de videos en la lista de tendencias que tiene cada canal. Se puede notar que el top 3 tienen una diferencia pequeña en la cantidad de videos comparandolo con el resto de canales.
 
-Otro análisis interesante es identificar a que pais pertenece cada uno de los canales del top 10. A continuación se genera un gráfico circular que muestra, en porcentajes, los paises que estan presentes en el top 10.
-
-```{r}
-perc_country <- group_by(top_10_global, country) |>
-  summarize(sum_videos = sum(Freq), country = first(country))
-
-perc_country <- group_by(test, country) |>
-  mutate(percentage = sum(sum_videos)/sum(test$sum_videos)) |>
-  mutate(label = scales::percent(percentage))
-
-ggplot(perc_country, aes(x = "", y = percentage, fill = country)) +
-  geom_col() +
-  geom_label(aes(label = label),
-             position = position_stack(vjust = 0.5),
-             show.legend = FALSE) +
-  coord_polar(theta = "y") +
-  guides(fill = guide_legend(title = "País")) +
-  theme_void()
-```
-
-Como muestra el gráfico, solo 3 países están en este top 10, siendo México el que tiene una mayoría importante respecto de Japón y Estados Unidos.
 
 # Preguntas y problemas
 
