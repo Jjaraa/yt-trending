@@ -76,7 +76,7 @@ summary(mx_dataset)
 El dataset usado, en ocasión del primer hito, corresponde a **mx_dataset**, el cual encapsula los videos más tendenciosos de YouTube en la región de México. Este dataset contiene, 121399 filas de información, dónde cada fila corresponde a los datos de un video que fue considerado para su captura debido a que estuvo en tendencia en algún momento de su existencia. Las columnas del dataset corresponde a:
 
 ```{r}
-unique(mx_dataset)
+names(mx_dataset)
 ```
 
 -   video_id (la id única de cada video en YouTube que se encuentra después de www.youtube.com/watch?)
@@ -96,9 +96,28 @@ unique(mx_dataset)
 -   ratings_disabled (booleano que muestra si la habilidad de darle me gusta o no me gusta al video se encuentra disponible)
 -   description (descripción del video escrita por el usuario que lo subió).
 
+
+El siguiente gráfico es una matriz de correlación entre columnas numericas del dataset de México.
+
+```{r}
+install.packages("corrplot", repos = "http://cran.us.r-project.org")
+library(corrplot)
+
+mx_dataset$comments_disabled <- as.numeric(as.logical(mx_dataset$comments_disabled))
+mx_dataset$ratings_disabled <- as.numeric(as.logical(mx_dataset$ratings_disabled))
+
+numeric_mx_dataset <- Filter(is.numeric, mx_dataset)
+numeric_mx_dataset.cor <- cor(numeric_mx_dataset)
+corrplot(numeric_mx_dataset.cor, method = 'number')
+```
+
+No se identifica ninguna correlación negativa imporante entre las columnas, pero si se identifican al menos 2 correlaciones positivas importantes: la presente entre la cantidad de visitas y likes, y la presente entre la cantidad de likes y de comentarios del video.
+
 A continuación se cargará un segundo dataset asociado al anterior que contiene la información de las categorías de los videos:
 
 ```{r}
+install.packages("tidyverse", repos = "http://cran.us.r-project.org")
+library(tidyverse)
 library(jsonlite)
 mx_list_categories <- fromJSON("./dataset/MX_category_id.json")
 mx_categories <- data.frame(mx_list_categories)
@@ -156,9 +175,9 @@ La cantidad de videos que tiene cada categoría para el dataset de México se pr
 ```{r}
 library(ggplot2)
 aux_categories <- data.frame(categoryId = mx_categories$items.id , categoryTitle = mx_categories$items.snippet$title)
-mx_categories <- merge(mx_dataset, aux_categories)
+mx_dataset <- merge(mx_dataset, aux_categories)
 
-ggplot(mx_categories, aes(x = categoryTitle)) +
+ggplot(mx_dataset, aes(x = categoryTitle)) +
   geom_bar(stat = 'count') +
   coord_flip() +
   xlab("Categoria") + ylab("Cantidad de videos")
@@ -169,20 +188,20 @@ Un análisis a simple vista del gráfico denota que existen dos categorías que 
 ```{r}
 #Se obtiene la cantidad de videos por cada categoría
 
-travel_and_events <- nrow(mx_categories[mx_categories$categoryId == 19,])
-sports <- nrow(mx_categories[mx_categories$categoryId == 17,])
-science_and_technology <- nrow(mx_categories[mx_categories$categoryId == 28,])
-pets_and_animals <- nrow(mx_categories[mx_categories$categoryId == 15,])
-people_and_blogs <- nrow(mx_categories[mx_categories$categoryId == 22,])
-news_and_politics <- nrow(mx_categories[mx_categories$categoryId == 25,])
-music <- nrow(mx_categories[mx_categories$categoryId == 10,])
-howto_and_style <- nrow(mx_categories[mx_categories$categoryId == 26,])
-gaming <- nrow(mx_categories[mx_categories$categoryId == 20,])
-film_and_animation <- nrow(mx_categories[mx_categories$categoryId == 1,])
-entertainment <- nrow(mx_categories[mx_categories$categoryId == 24,])
-education <- nrow(mx_categories[mx_categories$categoryId == 27,])
-comedy <- nrow(mx_categories[mx_categories$categoryId == 23,])
-autos_and_vehicles <- nrow(mx_categories[mx_categories$categoryId == 2,])
+travel_and_events <- nrow(mx_dataset[mx_dataset$categoryId == 19,])
+sports <- nrow(mx_dataset[mx_dataset$categoryId == 17,])
+science_and_technology <- nrow(mx_dataset[mx_dataset$categoryId == 28,])
+pets_and_animals <- nrow(mx_dataset[mx_dataset$categoryId == 15,])
+people_and_blogs <- nrow(mx_dataset[mx_dataset$categoryId == 22,])
+news_and_politics <- nrow(mx_dataset[mx_dataset$categoryId == 25,])
+music <- nrow(mx_dataset[mx_dataset$categoryId == 10,])
+howto_and_style <- nrow(mx_dataset[mx_dataset$categoryId == 26,])
+gaming <- nrow(mx_dataset[mx_dataset$categoryId == 20,])
+film_and_animation <- nrow(mx_dataset[mx_dataset$categoryId == 1,])
+entertainment <- nrow(mx_dataset[mx_dataset$categoryId == 24,])
+education <- nrow(mx_dataset[mx_dataset$categoryId == 27,])
+comedy <- nrow(mx_dataset[mx_dataset$categoryId == 23,])
+autos_and_vehicles <- nrow(mx_dataset[mx_dataset$categoryId == 2,])
 
 #Se crea un vector que contiene todas las categorías con su cantidad de videos
 categoria <- c(travel_and_events, sports, science_and_technology, pets_and_animals, people_and_blogs, news_and_politics, music, howto_and_style, gaming, film_and_animation, entertainment, education, comedy, autos_and_vehicles)
@@ -286,7 +305,6 @@ A continuación se realizará un análisis a los 10 canales con mayor cantidad d
 Gráfico de top 10 canales con mas videos en la lista de trendings:
 
 ```{r}
-library(tidyverse)
 top_10 <- group_by(mx_dataset, channelTitle) |>
   summarize(Freq = n()) |>
   arrange(desc(Freq)) |>
@@ -306,6 +324,7 @@ ggplot(top_10, aes(x = reorder(channelTitle, Freq), y = Freq)) +
 Gráfico de acumulacion de cantidad de likes y dislikes del top 10 canales con mas videos en trendings:
 
 ```{r fig.width = 8}
+install.packages("gridExtra")
 library(gridExtra)
 library("scales")
 top_10_accumulations <- group_by(mx_dataset, channelTitle) |>
@@ -348,20 +367,6 @@ ggplot(likes_accumulation, aes(x = reorder(channelTitle, Accumulation), y = Accu
   ylab('Cantidad de videos en trendings')
 ```
 
-### Matriz de correlación
-
-Matriz de correlación entre columnas para el dataset de trendings de México.
-
-```{r}
-library(corrplot)
-
-mx_dataset$comments_disabled <- as.numeric(as.logical(mx_dataset$comments_disabled))
-mx_dataset$ratings_disabled <- as.numeric(as.logical(mx_dataset$ratings_disabled))
-
-numeric_mx_dataset <- Filter(is.numeric, mx_dataset)
-numeric_mx_dataset.cor <- cor(numeric_mx_dataset)
-corrplot(numeric_mx_dataset.cor, method = 'number')
-```
 
 ## Análisis comparativo de todos los países
 
@@ -492,6 +497,10 @@ No existe una estandarización del concepto “interacción” para un determina
 El proyecto se documenta en un repositorio de GitHub, donde se podrá acceder en el siguiente link:
 
 [Repositorio de Github](https://github.com/Jjaraa/yt-trending)
+
+# Responsabilidades del grupo de trabajo
+
+**Sebastian Pardo**: Estuvo a cargo de la redacción de las secciones: Introducción y Preguntas y Preguntas. Se encargó del desarrollo del análisis inicial del archivo *MX_category_id.json*, la matriz de correlación del dataset de Mexico y los gráficos: *Cantidad de videos por categoría*, *Visitas vs likes*, *Visitas vs dislikes*, *Visitas vs comentarios*, *Top 10 canales con mas videos*, *Matriz de correlación entre los atributos*, *Cantidad de videos en trending por país*, *Cantidad de visitas por país* y *Canales con mas videos en la lista de tentendias (global)* . Finalmente se hizo cargo del desarrollo de la subsección *Análisis comparativo de todos los países*
 
 # Referencias
 
