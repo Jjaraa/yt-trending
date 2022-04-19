@@ -523,9 +523,13 @@ Se agregarán los links para acceder a los videos de las presentaciones del proy
 # Referencias
 
 [1] <https://www.statista.com/statistics/272014/global-social-networks-ranked-by-number-of-users/>
+
 [2] <https://www.statista.com/forecasts/1144088/youtube-users-in-the-world>
+
 [3] <https://www.statista.com/statistics/195140/new-user-generated-content-uploaded-by-users-per-minute/>
+
 [4] <https://www.statista.com/statistics/259477/hours-of-video-uploaded-to-youtube-every-minute/>
+
 [5] <https://support.google.com/youtube/answer/7239739?hl=es-419>
 
 
